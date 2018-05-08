@@ -5,8 +5,8 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import jsonWebToken from 'jsonwebtoken';
 
-const HASH_ROUNDS = 2;
-const TOKEN_SEED_LENGTH = 100;
+const HASH_ROUNDS = 8;
+const TOKEN_SEED_LENGTH = 124;
 
 const accountSchema = mongoose.Schema({
   username: {
