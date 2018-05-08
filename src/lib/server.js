@@ -9,23 +9,13 @@ import errorMiddleware from './error-middleware';
 
 const app = express();
 let server = null;
-//---------------------------------------------------------------------------------
-// Vinicio - these routes will be read in-order
-// so it's important that our 404 catch-all is the last one
-// (1) link in the chain
-app.use(loggerMiddleware); // Vinicio - using an app level middleware
+app.use(loggerMiddleware);
 app.use(authRoutes);
-//---------------------------------------------------------------------------------
-// (2) link in the chain
-// Vinicio - manking sure I return a 404 status if I don't have a matching route
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'Returning a 404 from the catch-all/default route');
   return response.sendStatus(404);
 });
-//---------------------------------------------------------------------------------
-// (3) link in the chain
 app.use(errorMiddleware);
-//---------------------------------------------------------------------------------
 
 const startServer = () => {
   return mongoose.connect(process.env.MONGODB_URI)
