@@ -3,13 +3,6 @@
 import superagent from 'superagent';
 import { startServer, stopServer } from '../lib/server';
 import { pCreateAccountMock, pRemoveAccountMock } from './lib/account-mock';
-// import { pCreateAccountMock } from './lib/account-mock';
-// const mock = {};
-// mock.request = {
-//   username: 'dawn',
-//   email: 'dawnstarr.aldrich@gmail.com',
-//   password: 'starr',
-// };
 
 const apiURL = `http://localhost:${process.env.PORT}/signup`;
 
@@ -32,15 +25,11 @@ describe('AUTH Router', () => {
   });
   test('POST should return a 400 status code for bad request', () => {
     return superagent.post(apiURL)
-      .send({
-        username: 'dawn',
-        password: 'starr',
-      })
+      .send('{')
       .then((response) => {
         expect(response.status).toEqual(400);
       });
   });
-
   test('409 due to duplicate name', () => {
     return pCreateAccountMock()
       .then((account) => {
