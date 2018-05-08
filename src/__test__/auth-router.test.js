@@ -24,4 +24,16 @@ describe('AUTH Router', () => {
         expect(response.body.token).toBeTruthy();
       });
   });
+
+  test('GET sending an empty object, should fail and return a 400', () => {
+    return superagent.post(apiURL)
+      .send({
+        username: ,
+        email: 'uafredrickson@gmail.com',
+        password: 'kids',
+      })
+      .then((response) => {
+        expect(response.status).toEqual(400);
+      });
+  });
 });

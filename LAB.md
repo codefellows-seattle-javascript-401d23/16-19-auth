@@ -40,8 +40,8 @@ Create a user `Account` model that keeps track of a username, email, hashed pass
 
 #### Server Endpoints
 * `POST /signup` 
-  [ ] pass data as stringifed JSON in the body of a **POST** request to create a new account
-  [ ] on success respond with a 200 status code and an authentication token
+  [x] pass data as stringifed JSON in the body of a **POST** request to create a new account
+  [x] on success respond with a 200 status code and an authentication token
   [ ] on failure due to a bad request send a 400 status code
 
 ## Tests
