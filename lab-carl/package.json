@@ -4,7 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint . && jest --coverage",
+    "dbon": "mkdir -p ./db && mongod --dbpath ./db",
+    "dboff": "killall mongod"
+  },
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/src/__test__/lib/test.env.js"
+    ]
   },
   "keywords": [],
   "author": "",
@@ -24,6 +31,7 @@
     "bcrypt": "^2.0.1",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
+    "express": "^4.16.3",
     "faker": "^4.1.0",
     "http-errors": "^1.6.3",
     "jsonwebtoken": "^8.2.1",
