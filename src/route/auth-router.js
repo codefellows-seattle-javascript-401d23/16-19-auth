@@ -1,6 +1,6 @@
 'use strict';
 
-import { ROUTER } from 'express';
+import { Router } from 'express';
 import { json } from 'body-parser';
 import Account from '../model/account';
 import logger from '../lib/logger';

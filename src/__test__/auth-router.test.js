@@ -15,9 +15,9 @@ describe('AUTH Router', () => {
   test('POST should return a 200 status code and a TOKEN', () => {
     return superagent.post(apiURL)
       .send({
-        username: 'hound',
-        email: 'hound@gregor.com',
-        password: 'hound',
+        username: 'Josh',
+        email: 'uafredrickson@gmail.com',
+        password: 'kids',
       })
       .then((response) => {
         expect(response.status).toEqual(200);
