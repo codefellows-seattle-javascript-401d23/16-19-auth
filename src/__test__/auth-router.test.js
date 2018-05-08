@@ -25,7 +25,7 @@ describe('AUTH Router', () => {
       });
   });
 
-  test('GET sending an empty object, should fail and return a 400', () => {
+  test(' sending an empty object, should fail and return a 400', () => {
     return superagent.post(apiURL)
       .send({
         username: ,

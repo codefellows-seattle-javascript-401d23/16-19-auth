@@ -20,7 +20,6 @@ app.use(errorMiddleware);
 const startServer = () => {
   return mongoose.connect(process.env.MONGODB_URI)
     .then(() => {
-      // Vinicio - once I'm here, I know that mongoose is connected
       server = app.listen(process.env.PORT, () => {
         logger.log(logger.INFO, `Server is listening on port ${process.env.PORT}`);
       });
