@@ -18,7 +18,8 @@ export default (request, response, next) => {
   // convert from base 64 to string is username:password
   const stringAuthHeader = Buffer.from(base64AuthHeader, 'base64').toString();
   const usernamePassword = stringAuthHeader.split(':');
-  // or const [username, password] = stringAuthHeader.split(':'); assigns local variables to those array values
+  // or const [username, password] = stringAuthHeader.split(':'); 
+  // assigns local variables to those array values
   if (!username || !password) {
     return next(new HttpError(400, 'Authorization invalid request error 3'));
   }

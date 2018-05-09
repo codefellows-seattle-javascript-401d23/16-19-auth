@@ -4,6 +4,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import logger from './logger';
 import authRoutes from '../route/router';
+import profileRoutes from '../route/profile-router';
 import loggerMiddleware from './logger-middleware';
 import errorMiddleware from './error-middleware';
 
@@ -13,6 +14,7 @@ let server = null;
 // (1) link in the chain
 app.use(loggerMiddleware); // middleware
 app.use(authRoutes);
+app.use(profileRoutes);
 //---------------------------------------------------------------------------------
 // (2) link in the chain
 app.all('*', (request, response) => {
