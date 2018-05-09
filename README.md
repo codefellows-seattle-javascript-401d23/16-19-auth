@@ -9,7 +9,7 @@ The main point of entry of this application is the index.js file which transpile
 
 # Paths
 
-POST ROUTE: Adds a new account to the MongoDB database.
+AUTH-POST ROUTE: Adds a new account to the MongoDB database.
 - Successful POST operations result in a 200 status code.
 - POST operations with missing required fields result in a 400 status code.
 - POST operations containing a pre-existing unique value (e.g. email) will result in a 409 status code.
@@ -33,6 +33,29 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
 });
 ```
 
+PROFILE-POST ROUTE: Adds a new profile associated to an account based off the account's id.
+- Successful POST operations result in a 200 status code.
+- POST operations with missing required fields result in a 400 status code.
+```javaScript
+profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, response, next) => {
+  if (!request.account || !request.body.firstName) {
+    return next(new HttpError(400, 'AUTH - invalid request'));
+  }
+  return new Profile({
+    ...request.body,
+    account: request.account._id,
+  })
+    .save()
+    .then((profile) => {
+      logger.log(logger.INFO, 'Returning a 200 and a new Profile.');
+      return response.json(profile);
+    })
+    .catch(next);
+});
+
+```
+
 # Change Log
 
-05-07-2018 10:15pm - POST route established, POST testing complete.
+05-07-2018 10:15PM - POST route established for authentication, POST testing complete.
+05-09-2018 8:02AM - POST route established for Profile, POST testing complete.

@@ -1,9 +1,11 @@
 'use strict';
 
-import { Router } from 'express'; // keyword is de-structuring and module
 import bodyParser from 'body-parser';
 import HttpError from 'http-errors';
+import { Router } from 'express'; // keyword is de-structuring and module
+
 import Account from '../model/account';
+import basicAuthMiddleware from '../lib/basic-auth-middleware';
 import logger from '../lib/logger';
 
 const jsonParser = bodyParser.json();
@@ -24,6 +26,18 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
     })
     .then((token) => {
       logger.log('logger.INFO', 'AUTH - returning a 200 code and a token.');
+      return response.json({ token });
+    })
+    .catch(next);
+});
+
+authRouter.get('/login', basicAuthMiddleware, (request, response, next) => {
+  if (!request.account) {
+    return next(new HttpError(400, 'AUTH - invalid request.'));
+  }
+  return request.account.createToken()
+    .then((token) => {
+      logger.log(logger.INFO, 'LOGIN - responding with a 200 status and a token.');
       return response.json({ token });
     })
     .catch(next);
