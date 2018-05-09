@@ -28,7 +28,6 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
 });
 
 profileRouter.get('/profiles/:id', (request, response, next) => {
-  // console.log(request);
   return Profile.findById(request.params.id)
     .then((profile) => {
       if (!profile) {

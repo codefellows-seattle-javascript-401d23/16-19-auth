@@ -10,7 +10,6 @@ export default (error, request, response, next) => { // eslint-disable-line no-u
     logger.log(logger.INFO, `Responding with a ${error.status} code and message ${error.message}`);
     return response.sendStatus(error.status);
   }
-  console.log(error);
 
   const errorMessage = error.message.toLowerCase();
 
