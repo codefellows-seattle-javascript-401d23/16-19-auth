@@ -14,6 +14,10 @@ const accountSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  // username: {
+  //   type: String,
+  //   required: true,
+  // },
   email: {
     type: String,
     required: true,
@@ -31,16 +35,16 @@ const accountSchema = mongoose.Schema({
 });
 
 // Vinicio - This functios is going to be used to login
-// function verifyPassword (password) {
-//   return bcrypt.compare(password, this.passwordHash)
-//     .then((result) => {
-//       if (!result) {
-//         // Vinicio - A 401 code would be the 'proper' response
-//         throw new HttpError(400, 'AUTH - incorrect data');
-//       }
-//       return this;
-//     });
-// }
+function verifyPassword (password) {
+  return bcrypt.compare(password, this.passwordHash)
+    .then((result) => {
+      if (!result) {
+        // Vinicio - A 401 code would be the 'proper' response
+        throw new HttpError(400, 'AUTH - incorrect data');
+      }
+      return this;
+    });
+}
 
 function pCreateToken() {
   this.tokenSeed = crypto.randomBytes(TOKEN_SEED_LENGTH).toString('hex');

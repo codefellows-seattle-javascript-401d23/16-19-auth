@@ -3,7 +3,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from './logger';
-import authRoutes from '../route/auth-router';
+import authRoutes from '../route/router';
 import loggerMiddleware from './logger-middleware';
 import errorMiddleware from './error-middleware';
 
