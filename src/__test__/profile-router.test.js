@@ -32,4 +32,17 @@ describe('POST /profiles', () => {
         expect(response.body.aboutMe.toString()).toEqual('I slap-pa da Bass');
       });
   });
+
+  test('GET /profiles should get a 200 finding by id', () => {
+    let accountMock = null;
+    return pCreateAccountMock()
+      .then((accountSetMock) => {
+        accountMock = accountSetMock;
+        return superagent.get(`${apiURL}/profiles/${accountSetMock.request._id}`);
+      })
+      .then((response) => {
+        expect(response.status).toEqual(200);
+        expect(response.body.account).toEqual(accountMock.request._id.toString());
+      });
+  });
 });

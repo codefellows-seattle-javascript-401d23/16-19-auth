@@ -10,6 +10,7 @@ import errorMiddleware from './error-middleware';
 
 const app = express();
 let server = null;
+
 app.use(loggerMiddleware);
 app.use(authRoutes);
 app.use(profileRoutes);
@@ -31,6 +32,7 @@ const startServer = () => {
 const stopServer = () => {
   return mongoose.disconnect()
     .then(() => {
+      console.log('!!!!THIS IS THE SEVER AT STOP SERVER', server);
       server.close(() => {
         logger.log(logger.INFO, 'Server is off');
       });
