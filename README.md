@@ -1,7 +1,6 @@
 # LAB17 Application
 
 **Author**: Joshua Fredrickson
-
 **Version**: 1.0.0 
 
 ## Overview
@@ -20,8 +19,8 @@ To use the Lab17 application, [Node.js](https://nodejs.org/en/), [npm](https://w
 
 ## Architecture
 This application was deployed with the following technologies.
-Node.js, npm, body-parser, dotenv, express, faker, mongoose, winston, babel, superagent, 
-http-errors, jest, eslint, JavaScript
+Node.js, npm, body-parser, dotenv, express, faker, mongoose, winston, babel, superagent, json web
+ tokens, http-errors, jest, eslint, JavaScript
     
 SERVER ENDPOINTS 
 POST /api/signup
@@ -34,6 +33,7 @@ DELETE /api/profile/:id
 05-08-2018  6:30pm  first commit, scaffolding tests not passing
 05-08-2018  8:00pm  passing 2 tests
 05-09-2018  7:25am  added readme
+
 
 ## Credits and Collaborations
 Special thanks to all of the Code Fellows staff and fellow 401-d23 students.
