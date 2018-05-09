@@ -3,29 +3,41 @@
 import { json } from 'body-parser';
 import { Router } from 'express';
 import HttpError from 'http-errors';
-import Profile from '../model/profile';
+import Song from '../model/song';
 import bearerAuthMiddleware from '../lib/bearer-auth-middleware';
 import logger from '../lib/logger';
 
 
 const jsonParser = json();
-const profileRouter = new Router();
+const songRouter = new Router();
 
-profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, response, next) => {
+songRouter.post('/songs', bearerAuthMiddleware, jsonParser, (request, response, next) => {
   if (!request.account) {
     return next(new HttpError(400, 'Auth - invalid request'));
   }
 
-  return new Profile({
+  return new Song({
     ...request.body,
     account: request.account._id,
   })
     .save()
     .then((profile) => {
-      logger.log(logger.INFO, 'Returning a 200 and a new Profile');
+      logger.log(logger.INFO, 'Returning a 200 and a new Song');
       return response.json(profile);
     })
     .catch(next);
 });
 
-export default profileRouter;
+songRouter.get('/songs', bearerAuthMiddleware, (request, response, next) => {
+  if (!request.account) {
+    return next(new HttpError(400, 'Auth - Invalid request'));
+  }
+
+  return request.song.pCreateToken()
+    .then((token) => {
+      logger.log(logger.INFO, 'Getting a song');
+      return response.json({ token });
+    });
+});
+
+export default songRouter;

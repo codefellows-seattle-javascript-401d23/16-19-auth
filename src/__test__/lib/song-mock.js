@@ -1,33 +1,33 @@
 'use strict';
 
 import faker from 'faker';
-import Profile from '../../model/song';
+import Song from '../../model/song';
 import { pCreateAccountMock, pRemoveAccountMock } from './account-mock';
 
-const pCreateProfileMock = () => {
+const pCreateSongMock = () => {
   const resultMock = {};
   return pCreateAccountMock()
     .then((accountSetMock) => {
       resultMock.accountSetMock = accountSetMock;
-      return new Profile({
-        bio: faker.lorem.words(10),
-        avatar: faker.random.image(),
-        lastName: faker.name.lastName(),
-        firstName: faker.name.firstName(),
+      return new Song({
+        song: faker.lorem.words(10),
+        artist: faker.random.image(),
+        genre: faker.name.lastName(),
+        length: faker.name.firstName(),
         account: accountSetMock.account._id, // this line sets up the relationship
       }).save();
     })
-    .then((profile) => {
-      resultMock.profile = profile;
+    .then((song) => {
+      resultMock.song = song;
       return resultMock;
     });
 };
 
-const pRemoveProfileMock = () => {
+const pRemoveSongMock = () => {
   return Promise.all([
-    Profile.remove({}),
+    Song.remove({}),
     pRemoveAccountMock(),
   ]);
 };
 
-export { pCreateProfileMock, pRemoveProfileMock };
+export { pCreateSongMock, pRemoveSongMock };

@@ -3,7 +3,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from './logger';
-import authRouter from '../route/auth-router';
+import authRouter from '../route/auth-route';
+import songRouter from '../route/song-router';
 import loggerMiddleware from './logger-middleware';
 import errorMiddleware from './error-middleware';
 
@@ -13,6 +14,7 @@ let server = null;
 app.use(loggerMiddleware); // Mike: you removed the logger.log's from the routes
 // (2) then this one...
 app.use(authRouter);
+app.use(songRouter);
 
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'SERVER: Returning a 404 from the catch-all/default route');
