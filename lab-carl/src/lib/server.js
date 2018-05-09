@@ -6,6 +6,7 @@ import logger from './logger';
 import authRoutes from '../route/auth-router';
 import loggerMiddleware from './logger-middleware';
 import errorMiddleware from './error-middleware';
+import profileRoutes from '../route/profile-route';
 
 const app = express();
 let server = null;
@@ -13,6 +14,7 @@ let server = null;
 app.use(loggerMiddleware); // logger middleware at the app-level
 
 app.use(authRoutes);
+app.use(profileRoutes);
 
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'Returning a 404 from the catch/all default route');
