@@ -31,7 +31,9 @@ DELETE /api/profile/:id
 
 
 ## Change Log 
-05-08-2018  4:30pm  first commit, scaffolding tests not passing
+05-08-2018  6:30pm  first commit, scaffolding tests not passing
+05-08-2018  8:00pm  passing 2 tests
+05-09-2018  7:25am  added readme
 
 ## Credits and Collaborations
 Special thanks to all of the Code Fellows staff and fellow 401-d23 students.
