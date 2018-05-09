@@ -4,7 +4,7 @@ import superagent from 'superagent';
 import faker from 'faker';
 import { startServer, stopServer } from '../lib/server';
 import { pCreateAccountMock } from './lib/account-mock';
-import { pRemoveProfileMock } from './lib/profile-mock';
+import { pRemoveProfileMock, pCreateProfileMock } from './lib/profile-mock';
 
 const apiURL = `http://localhost:${process.env.PORT}`;
 
@@ -67,6 +67,24 @@ describe('POST /profiles', () => {
       })
       .catch((error) => {
         expect(error.status).toEqual(401);
+      });
+  });
+});
+
+describe('GET /profiles', () => {
+  test.only('should respond with 200 if there are no errors', () => {
+    let accountMock = null; // Zachary - preserving the dinosaur because of scope rules
+    return pCreateAccountMock() // Zachary - test only a GET request 
+      .then((mockProfilePost) => {
+        accountMock = mockProfilePost;
+        return superagent.get(`${apiURL}`);
+      })
+      .then((response) => {
+        expect(response.status).toEqual(200);
+        expect(response.body.firstName).toEqual(accountMock.firstName);
+        expect(response.body.lastName).toEqual(accountMock.lastName);
+        expect(response.body.bio).toEqual(accountMock.bio);
+        expect(response.body._id).toBeTruthy();
       });
   });
 });
