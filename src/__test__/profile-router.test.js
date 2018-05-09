@@ -21,17 +21,17 @@ describe('POST /profiles', () => {
         return superagent.post(`${apiURL}/profiles`)
           .set('Authorization', `Bearer ${accountSetMock.token}`)
           .send({
-            bio: 'I code all day, every day',
-            firstName: 'Zachary',
-            lastName: 'Schumpert',
+            biography: 'I code all day, every day',
+            nameFirst: 'Zachary',
+            nameLast: 'Schumpert',
           });
       })
       .then((response) => {
         expect(response.status).toEqual(200);
         expect(response.body.account).toEqual(accountMock.account._id.toString());
-        expect(response.body.firstName).toEqual('Zachary');
-        expect(response.body.lastName).toEqual('Schumpert');
-        expect(response.body.bio).toEqual('I code all day, every day');
+        expect(response.body.nameFirst).toEqual('Zachary');
+        expect(response.body.nameLast).toEqual('Schumpert');
+        expect(response.body.biography).toEqual('I code all day, every day');
       });
   });
   test('POST - 404 due to no route found', () => {
@@ -61,9 +61,9 @@ describe('POST /profiles', () => {
     return superagent.post(`${apiURL}/profiles`)
       .set('Authorization', 'Bearer 1234')
       .send({
-        bio: 'I code all day, every day',
-        firstName: 'Zachary',
-        lastName: 'Schumpert',
+        biography: 'I code all day, every day',
+        nameFirst: 'Zachary',
+        nameLast: 'Schumpert',
       })
       .catch((error) => {
         expect(error.status).toEqual(401);
@@ -72,7 +72,7 @@ describe('POST /profiles', () => {
 });
 
 describe('GET /profiles', () => {
-  test.only('should respond with 200 if there are no errors', () => {
+  test('should respond with 200 if there are no errors', () => {
     let accountMock = null; // Zachary - preserving the dinosaur because of scope rules
     return pCreateAccountMock() // Zachary - test only a GET request 
       .then((mockProfilePost) => {
@@ -81,9 +81,9 @@ describe('GET /profiles', () => {
       })
       .then((response) => {
         expect(response.status).toEqual(200);
-        expect(response.body.firstName).toEqual(accountMock.firstName);
-        expect(response.body.lastName).toEqual(accountMock.lastName);
-        expect(response.body.bio).toEqual(accountMock.bio);
+        expect(response.body.nameFirst).toEqual(accountMock.nameFirst);
+        expect(response.body.nameLast).toEqual(accountMock.nameLast);
+        expect(response.body.biography).toEqual(accountMock.biography);
         expect(response.body._id).toBeTruthy();
       });
   });

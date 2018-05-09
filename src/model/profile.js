@@ -3,10 +3,10 @@
 import mongoose from 'mongoose';
 
 const profileSchema = mongoose.Schema({
-  firstName: { type: String },
-  lastName: { type: String },
-  bio: { type: String },
-  avatar: { type: String },
+  nameFirst: { type: String },
+  nameLast: { type: String },
+  biography: { type: String },
+  pic: { type: String },
   account: {
     type: mongoose.Schema.ObjectId,
     required: true,
