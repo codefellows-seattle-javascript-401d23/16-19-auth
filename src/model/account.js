@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt'; // used to generate hash
 import crypto from 'crypto'; // used to generate random data
 import jsonWebToken from 'jsonwebtoken';
+import HttpError from 'http-errors';
 
 // CAPS naming conventions only apply to strings and numbers.
 const HASH_ROUNDS = 8;
@@ -13,6 +14,11 @@ const accountSchema = mongoose.Schema({
   passwordHash: {
     type: String,
     required: true,
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
   },
   email: {
     type: String,
@@ -30,17 +36,18 @@ const accountSchema = mongoose.Schema({
   },
 });
 
-// this function is going to be used to login
-// function verifyPassword(password) {
-//   return bcrypt.compare(password, this.passwordHash)
-//   .then((result) => {
-//     if (!result) {
-//       // A 401 code would be the 'proper' response.
-//       throw new HttpError(400, 'AUTH - incorrect data.');
-//     }
-//     return this;
-//   });
-// }
+/* this function is going to be used to login
+TODO: check code for where else this function is called. */
+function verifyPassword(password) {
+  return bcrypt.compare(password, this.passwordHash)
+    .then((result) => {
+      if (!result) {
+      // A 401 code would be the 'proper' response.
+        throw new HttpError(400, 'AUTH - incorrect data.');
+      }
+      return this; // returns the entire current account.
+    });
+}
 
 function createToken() {
   // 'this' is equal to the account object we are working with.
@@ -60,6 +67,7 @@ function createToken() {
   // TODO: error management, recursive, make sure token is unique.
 }
 
+accountSchema.methods.verifyPassword = verifyPassword;
 accountSchema.methods.createToken = createToken;
 
 const Account = mongoose.model('account', accountSchema);
