@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 
 const profileSchema = mongoose.Schema({
-  firstName: { type: String },
+  firstName: { type: String, required: true },
   lastName: { type: String },
   mantra: { type: String },
   profileImage: { type: String },
