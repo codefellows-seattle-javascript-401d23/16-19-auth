@@ -26,7 +26,7 @@ export default (request, response, next) => {
   return Account.findOne({ username })
     .then((account) => {
       if (!account) {
-        return next(new HttpError(400, 'Auth - invalid request'));
+        return next(new HttpError(404, 'Auth ERROR not found'));
       }
       return account.pVerifyPassword(password);
     })

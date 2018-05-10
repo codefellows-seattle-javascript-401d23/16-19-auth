@@ -29,7 +29,7 @@ authRoute.post('/login', jsonParser, (request, response, next) => {
 
 authRoute.get('/login', basicAuthMiddleware, (request, response, next) => {
   if (!request.account) {
-    return next(new HttpError(400, 'AUTH - invalid request'));
+    return next(new HttpError(404, 'AUTH - invalid request'));
   }
   return request.account.pCreateToken()
     .then((token) => {
