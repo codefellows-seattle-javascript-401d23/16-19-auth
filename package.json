@@ -2,12 +2,17 @@
   "name": "16-basic-auth",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "9.11"
+  },
   "main": "index.js",
   "scripts": {
     "test": "eslint . && jest --coverage --forceExit --runInBand",
     "test-nolint": "jest --coverage --forceExit --runInBand",
     "dbon": "mkdir -p ./db && mongod --dbpath ./db",
-    "dboff": "killall mongod"
+    "dboff": "killall mongod",
+    "build": "babel src -d build",
+    "start": "babel src -d build && node index.js"
   },
   "jest": {
     "setupFiles": [
@@ -19,8 +24,10 @@
   "license": "ISC",
   "devDependencies": {
     "aws-sdk-mock": "^2.0.0",
+    "babel-cli": "^6.26.0",
     "babel-eslint": "^8.2.3",
     "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
