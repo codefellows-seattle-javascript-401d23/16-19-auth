@@ -53,7 +53,7 @@ function createToken() {
       // Zachary - here, we know that the tokenSeed is unique
       return jsonWebToken.sign(
         { tokenSeed: account.tokenSeed },
-        process.env.CAT_CLOUD_SECRET,
+        process.env.Z_COOL_SECRET,
       );
     });
 }
@@ -78,3 +78,5 @@ Account.pCreate = (username, email, password) => {
     });
   // Zachary - password is GONE!
 };
+
+export default mongoose.model('account', accountSchema);

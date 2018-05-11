@@ -4,7 +4,7 @@ import jsonWebToken from 'jsonwebtoken';
 import HttpError from 'http-errors';
 import Account from '../model/account';
 
-const promisfy = fn => (...args) => {
+const promisify = fn => (...args) => {
   return new Promise((resolve, reject) => {
     fn(...args, (error, data) => {
       if (error) {

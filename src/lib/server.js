@@ -43,7 +43,7 @@ const startServer = () => {
     .catch((err) => {
       logger.log(logger.ERROR, `something happened, ${JSON.stringify(err)}`);
     });
-    };
+};
 
 const stopServer = () => {
   return mongoose.disconnect()
