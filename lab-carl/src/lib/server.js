@@ -4,9 +4,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import logger from './logger';
 import authRoutes from '../route/auth-router';
+import profileRoutes from '../route/profile-route';
+import imageRoutes from '../route/image-router';
 import loggerMiddleware from './logger-middleware';
 import errorMiddleware from './error-middleware';
-import profileRoutes from '../route/profile-route';
 
 const app = express();
 let server = null;
@@ -15,6 +16,7 @@ app.use(loggerMiddleware); // logger middleware at the app-level
 
 app.use(authRoutes);
 app.use(profileRoutes);
+app.use(imageRoutes);
 
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'Returning a 404 from the catch/all default route');

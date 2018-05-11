@@ -1,0 +1,67 @@
+'use strict';
+
+import multer from 'multer';
+import { Router } from 'express';
+import HttpError from 'http-errors';
+import logger from '../lib/logger';
+import bearerAuthMiddleware from '../lib/bearer-auth-middleware';
+import Image from '../model/image';
+import { s3Upload, s3Remove } from '../lib/s3';
+
+const multerUpload = multer({ dest: `${__dirname}/../temp` });
+
+const imageRouter = new Router();
+
+imageRouter.post('/images', bearerAuthMiddleware, multerUpload.any(), (request, response, next) => {
+  if (!request.account) {
+    return next(new HttpError(404, 'IMAGE ROUTER ERROR: not found'));
+  }
+
+  if (!request.body.title || request.files.length > 1 || request.files[0].fieldname !== 'image') {
+    console.log('this is the request.body');
+    return next(new HttpError(400, 'IMAGE ROUTER ERROR, invalid request'));
+  } 
+
+  const file = request.files[0];
+  console.log(file, 'this is the file');
+  const key = `${file.filename}.${file.originalname}`;
+  console.log(key, 'this is the key');
+
+  return s3Upload(file.path, key)
+    .then((awsUrl) => {
+      console.log(awsUrl, 'inside the s3upload');
+      return new Image({
+        title: request.body.title,
+        account: request.account._id,
+        url: awsUrl,
+      }).save();
+    })
+    .then(image => response.json(image))
+    .catch(next);
+});
+
+imageRouter.get('/images/:id', bearerAuthMiddleware, (request, response, next) => {
+  return Image.findById(request.params.id)
+    .then((image) => {
+      if (!image) {
+        return next(400, 'No Image, bad ID');
+      }
+
+      logger.log(logger.INFO, 'Returning a 200 status code and requested Image');
+      return response.json(image);
+    })
+    .catch(next);
+});
+
+imageRouter.delete('/images/:id', bearerAuthMiddleware, (request, response, next) => {
+  return Image.findByIdAndRemove(request.params.id)
+    .then((image) => {
+      if (!image) {
+        return next(new HttpError(404, 'DELETE - image not found'));
+      }
+      logger.log(logger.INFO, 'DELETE IMAGE SUCCESSFUL');
+      return response.sendStatus(204);
+    });
+});
+
+export default imageRouter;
