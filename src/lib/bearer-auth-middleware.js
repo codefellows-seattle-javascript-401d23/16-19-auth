@@ -4,6 +4,7 @@ import jsonWebToken from 'jsonwebtoken';
 import HttpError from 'http-errors';
 import Account from '../model/account';
 
+// This makes any function into a promise
 const promisify = fn => (...args) => {
   return new Promise((resolve, reject) => {
     fn(...args, (error, data) => {
