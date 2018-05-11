@@ -93,4 +93,17 @@ describe('TESTING ROUTES AT /sounds', () => {
         expect(response.status).toEqual(404);
       });
   });
+  test('DELETE /sounds should respond with a 204 upon successful deletion', () => {
+    let testMock = null;
+    return pCreateSoundMock()
+      .then((mockResponse) => {
+        testMock = mockResponse.sound;
+        const { token } = mockResponse.accountMock;
+        return superagent.delete(`${apiUrl}/sounds/${testMock._id}`)
+          .set('Authorization', `Bearer ${token}`)
+          .then((response) => {
+            expect(response.status).toEqual(204);
+          });
+      });
+  });
 });
