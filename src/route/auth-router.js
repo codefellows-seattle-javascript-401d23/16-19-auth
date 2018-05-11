@@ -2,8 +2,10 @@
 
 import { Router } from 'express';
 import { json } from 'body-parser';
+import HttpError from 'http-errors';
 import Account from '../model/account';
 import logger from '../lib/logger';
+import basicAuthMiddleWare from '../lib/basic-auth-middleware';
 
 const authRouter = new Router();
 const jsonParser = json();
@@ -22,5 +24,14 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
     .catch(next);
 });
 
-export default authRouter;
+authRouter.get('/login', basicAuthMiddleWare, (request, response, next) => {
+  if (!request.account) {
+    return next(new HttpError(404, '_ERROR_ not found'));
+  }
 
+  return request.account.createToken()
+    .then(token => response.json({ token }))
+    .catch(next);
+});
+
+export default authRouter;

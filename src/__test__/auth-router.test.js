@@ -12,7 +12,7 @@ describe('AUTH Router', () => {
   afterAll(stopServer);
   afterEach(pRemoveAccountMock);
 
-  test.skip('POST should return a 200 status code and a TOKEN', () => {
+  test('POST should return a 200 status code and a TOKEN', () => {
     return superagent.post(apiURL)
       .send({
         username: 'dawn',
@@ -24,7 +24,7 @@ describe('AUTH Router', () => {
         expect(response.body.token).toBeTruthy();
       });
   });
-  test.skip('POST should return a 400 status code for bad request', () => {
+  test('POST should return a 400 status code for bad request', () => {
     return superagent.post(apiURL)
       .send({
         email: 'dawnstarr.aldrich@gmail.com',

@@ -14,7 +14,7 @@ describe('POST /profiles', () => {
   afterAll(stopServer);
   afterEach(pRemoveProfileMock);
 
-  test.skip('POST /profiles should get a 200 and the newly created profile', () => {
+  test('POST /profiles should get a 200 and the newly created profile', () => {
     let accountMock = null;
     return pCreateAccountMock()
       .then((accountSetMock) => {
@@ -35,7 +35,7 @@ describe('POST /profiles', () => {
         expect(response.body.bio).toEqual('I am a walrus');
       });
   });
-  test.only('POST 400 due to lack of name', () => {
+  test('POST 400 due to lack of name', () => {
     let accountMock = null;
     return pCreateAccountMock()
       .then((accountSetMock) => {

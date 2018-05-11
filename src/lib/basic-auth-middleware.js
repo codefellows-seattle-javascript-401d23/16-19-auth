@@ -5,12 +5,12 @@ import Account from '../model/account';
 
 export default (request, response, next) => {
   if (!request.headers.authorization) {
-    return next(new HttpError(400, 'AUTH - invalid request'));
+    return next(new HttpError(400, '__ERROR__ authorization header required'));
   }
 
   const base64AuthHeader = request.headers.authorization.split('Basic ')[1];
   if (!base64AuthHeader) {
-    return next(new HttpError(400, 'AUTH - invalid request'));
+    return next(new HttpError(400, '__ERROR__ basic authorization required'));
   }
 
   const stringAuthHeader = Buffer.from(base64AuthHeader, 'base64').toString();
@@ -18,13 +18,13 @@ export default (request, response, next) => {
   const [username, password] = stringAuthHeader.split(':');
 
   if (!username || !password) {
-    return next(new HttpError(400, 'AUTH - invalidrequest'));
+    return next(new HttpError(400, '__ERROR__ username and password required'));
   }
 
   return Account.findOne({ username })
     .then((account) => {
       if (!account) {
-        return next(new HttpError(400, 'AUTH - invalid request'));
+        throw new HttpError(404, '__ERROR__ not found');
       }
       return account.pVerifyPassword(password);
     })

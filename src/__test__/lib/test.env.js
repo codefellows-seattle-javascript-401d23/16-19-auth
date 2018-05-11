@@ -8,7 +8,7 @@ const isAwsMock = true;
 if (isAwsMock) {
   process.env.AWS_BUCKET = 'fake';
   process.env.AWS_SECRET_ACCESS_KEY = 'fakseasdlfbbbbdddksladftttttttooooooowwwwwwwwwwmmm';
-  process.env.AWS.ACCESS_KEY_ID = 'fakeafadfadkfhadkfhadkfhaskdfhakdfhdkfhad';
+  process.env.AWS_ACCESS_KEY_ID = 'fakeafadfadkfhadkfhadkfhaskdfhakdfhdkfhad';
   require('./setup');
 } else {
   require('dotenv').config();

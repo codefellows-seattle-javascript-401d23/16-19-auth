@@ -17,13 +17,14 @@ const promisify = callbackStyleFunction => (...args) => {
 
 export default (request, response, next) => {
   if (!request.headers.authorization) {
-    return next(new HttpError(400, 'AUTH - invalid request'));
+    return next(new HttpError(400, '__ERROR__ authorization header required'));
   }
+
 
   const token = request.headers.authorization.split('Bearer ')[1];
 
   if (!token) {
-    return next(new HttpError(400, 'AUTH - invalid request'));
+    return next(new HttpError(400, '__ERROR__ token required'));
   }
 
   return promisify(jsonWebToken.verify)(token, process.env.PHOTO_BOMB_SECRET)

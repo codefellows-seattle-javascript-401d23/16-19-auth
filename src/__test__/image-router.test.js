@@ -1,14 +1,14 @@
 'use strict';
 
 import superagent from 'superagent';
-import { startServer, stopServer } from './lib/image-mock';
+import { startServer, stopServer } from '../lib/server';
 import { pRemoveImageMock, pCreateImageMock } from './lib/image-mock';
 
-const apiUrl = `http://localhost:${process.env.PORT}`;
+const apiURL = `http://localhost:${process.env.PORT}`;
 
 describe('TESTING ROUTES AT /images', () => {
   beforeAll(startServer);
-  afterEach(pRemoveSoundMock);
+  afterEach(pRemoveImageMock);
   afterAll(stopServer);
 
   describe('POST 200 for successful post /images', () => {
@@ -17,10 +17,10 @@ describe('TESTING ROUTES AT /images', () => {
       return pCreateImageMock()
         .then((mockResponse) => {
           const { token } = mockResponse.accountMock;
-          return superagent.post(`${apiUrl}/images`)
+          return superagent.post(`${apiURL}/images`)
             .set('Authorization', `Bearer ${token}`)
             .field('title', 'beach sunset')
-            .attach('sound', `${__dirname}/asset/sunset.jpg`)
+            .attach('image', `${__dirname}/asset/sunset.jpg`)
             .then((response) => {
               expect(response.status).toEqual(200);
               expect(response.body.title).toEqual('beach sunset');
@@ -28,11 +28,11 @@ describe('TESTING ROUTES AT /images', () => {
               expect(response.body.url).toBeTruthy();
             });
         })
-      .catch((err) => {
-        console.log(err.message, 'ERR IN TEST');
-        console.log(err.status, 'CODE ERR IN TEST');
-        experect(err.status).toEqual(200);
-      };
+        .catch((err) => {
+          console.log(err.message, 'ERR IN TEST');
+          console.log(err.status, 'CODE ERR IN TEST');
+          expect(err.status).toEqual(200);
+        });
     });
   });
 });
