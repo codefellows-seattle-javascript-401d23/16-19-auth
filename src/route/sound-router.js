@@ -49,4 +49,23 @@ soundRouter.get('/sounds/:id', bearerAuthMiddleWare, (request, response, next) =
     .catch(next);
 });
 
+soundRouter.delete('/sounds/:id', bearerAuthMiddleWare, (request, response, next) => {
+  if (!request.params.id) {
+    return next(new HttpError(404, 'SOUND ROUTER DELETE ERROR: no params id'));
+  }
+  return Sound.findByIdAndRemove(request.params.id)
+    .then((sound) => {
+      if (!sound) {
+        logger.log(logger.INFO, 'GET - responding with a 404 status code - (!sound)');
+        return next(new HttpError(404, 'sound not found'));
+      }
+      logger.log(logger.INFO, 'DELETE - responding with a 204 status code');
+      return s3Remove(sound.url);
+    })
+    .then(() => {
+      return response.sendStatus(204);
+    })
+    .catch(next);
+});
+
 export default soundRouter;

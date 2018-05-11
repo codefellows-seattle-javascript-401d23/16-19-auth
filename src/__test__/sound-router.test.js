@@ -73,7 +73,7 @@ describe('TESTING ROUTES AT /sounds', () => {
         });
     });
   });
-  describe('GET  401 for a succesful get from /sounds', () => {
+  test('GET  401 for a succesful get from /sounds', () => {
     return pCreateSoundMock()
       .then(() => {
         return superagent.post(`${apiUrl}/sounds`)
