@@ -1,7 +1,7 @@
 'use strict';
 
 import faker from 'faker';
-import { pCreateAccountMock, pRemoveAccountMock } from './account-mock'; // TODO: pRemoveAccountMock is defined but never used
+import { pCreateAccountMock } from './account-mock'; // TODO: pRemoveAccountMock is defined but never used
 import Image from '../../model/image'; //
 import Account from '../../model/account'; //
 

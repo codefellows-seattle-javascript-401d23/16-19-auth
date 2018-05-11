@@ -21,7 +21,7 @@ const promisify = callbackStyleFunction => (...args) => {
 };
 
 export default (request, response, next) => {
-  console.log(request.headers.authorization);
+  console.log(request.headers.authorization, 'inside of bearer-auth-middleware');
   if (!request.headers.authorization) {
     return next(new HttpError(400, 'Auth - invalid request'));
   }

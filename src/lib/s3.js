@@ -27,6 +27,28 @@ const s3Upload = (path, key) => {
     });
 };
 
+
+// TODO: adding s3 getObject method for http GET route.
+const s3Get = (key) => {
+  const aws = require('aws-sdk');
+  const amazonS3 = new aws.S3();
+  const getOptions = {
+    Bucket: process.env.AWS_BUCKET,
+    Key: key,
+  };
+
+  return amazonS3.getObject(getOptions)
+    .promise()
+    .then((data) => {
+      console.log(data, 'SUCCESSFUL GET OBJECT FROM S3 BUCKET');
+    })
+    .catch((err) => {
+      Promise.reject(err);
+    });
+
+
+}
+
 const s3Remove = (key) => {
   const aws = require('aws-sdk');
   const amazonS3 = new aws.S3();
@@ -45,5 +67,5 @@ const s3Remove = (key) => {
     });
 };
 
-export { s3Upload, s3Remove };
+export { s3Upload, s3Get, s3Remove };
 
