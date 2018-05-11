@@ -1,12 +1,20 @@
-# Lab 17 - Bearer Authentication
+# Lab 19 - Authorization - File Management
 **Author**: Carl Olson
-**Version**: 1.1.0
+**Version**: 1.2.0
 
 ## Overview
-This lab project involved using basic and bearer authentication to create an account, login, and make GET and POST requests to create or find a profile. This is the second in a series of labs that will build on each other. We added a second Schema/model, Profile, which can only be created referencing a valid account. Mongoose and MongoDB are used for the Schemas and database. With authentication being the focus, we used bcrypt for a password hashing algorithm. Crypto, which is built into express, is used to create the token seed. And json web token is used to generate the token. 
+This is a continuation of previous labs using basic/bearer authentication and MongoDB/mongoose schemas. For this lab, I added a third model (image) which represents a file asset and can be stored on AWS S3. The metadata about the image file is stored in MongDB.
 
 ## Testing
 To start the server for testing, enter in the command line: ```npm run dbon```. Then to start the test, enter: ```npm run test```. To turn the server off, enter: ```npm run dboff```.
+
+#### Image Model
+
+A ```POST``` request to the /images endpoint will use the AWS SDK to post the image to my S3 Bucket, and return a 200 status code response. If the requests is sent without the proper data it will return a 400 code, and without a proper authentication token it will return a 401 code. 
+
+A ```GET``` request to the /images/:id endpoint will retrieve the image and return a 200 status code response, if successful. If the requests is sent without the proper data it will return a 404 code, and without a proper authentication token it will return a 401 code. 
+
+A ```DELETE``` request will remove an asset from the db and return a status code of 204. If improper or incomplete data is sent it will return a 400, and if an invalid token is sent it will return a 401 code. 
 
 #### Account Model
 A successful status code of 200 is sent as the response if an account and token are created with the data sent in the POST request. If necessary data is not included in the request, a 400 status code will be sent in response. And if the request includes data that attemps to use a duplicate key (email and username must be unique), a 409 code is sent in response. 

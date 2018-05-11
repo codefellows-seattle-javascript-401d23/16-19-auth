@@ -14,21 +14,18 @@ describe('Testing routes at /images', () => {
   afterAll(stopServer);
   afterEach(pRemoveImageMock);
 
-  describe('POST 200 for successful post to /images', () => {
-    test('should return 200', () => {
+  describe('POST to /images', () => {
+    test('should return 200 for a successful POST', () => {
       // jest.setTimeout(10000);
       return pCreateImageMock()
         .then((mockResponse) => {
-          // console.log('mock image created.');
           // const token = mockResponse.accountMock.token
           const { token } = mockResponse.accountMock; // same as above line
-          // console.log(token, 'this is the token');
           return superagent.post(`${apiUrl}/images`)
             .set('Authorization', `Bearer ${token}`)
-            .field('title', 'image of dog') // or object literal?
-            .attach('image', `${__dirname}/assets/dog.jpg`) // make sure this file path is correct.
+            .field('title', 'image of dog')
+            .attach('image', `${__dirname}/assets/dog.jpg`)
             .then((response) => {
-              console.log(response.body, 'this is the response body');
               expect(response.status).toEqual(200);
               expect(response.body.title).toEqual('image of dog');
               expect(response.body._id).toBeTruthy();
@@ -36,8 +33,36 @@ describe('Testing routes at /images', () => {
             });
         })
         .catch((err) => {
-          console.log('this is in the catch of the test');
           expect(err.status).toEqual(200);
+        });
+    });
+
+    test('should return a 400 status if incomplete data is sent', () => {
+      return pCreateImageMock()
+        .then((mockResponse) => {
+          const { token } = mockResponse.accountMock;
+          return superagent.post(`${apiUrl}/images`)
+            .set('Authorization', `Bearer ${token}`)
+            .field('label', 'image of dog') // label instead of title
+            .attach('image', `${__dirname}/assets/dog.jpg`);
+        })
+        .then(Promise.reject)
+        .catch((err) => {
+          expect(err.status).toEqual(400);
+        });
+    });
+
+    test('should return a 401 status if token is invalid', () => {
+      return pCreateImageMock()
+        .then(() => {
+          return superagent.post(`${apiUrl}/images`)
+            .set('Authorization', 'Bearer')
+            .field('title', 'image of dog')
+            .attach('image', `${__dirname}/assets/dog.jpg`);
+        })
+        .then(Promise.reject)
+        .catch((err) => {
+          expect(err.status).toEqual(401);
         });
     });
   });
@@ -48,12 +73,10 @@ describe('Testing routes at /images', () => {
       return pCreateImageMock()
         .then((mockAccount) => {
           accountInstance = mockAccount;
-          console.log(mockAccount.image, 'this is the mock image');
           return superagent.get(`${apiUrl}/images/${mockAccount.image._id}`)
             .set('Authorization', `Bearer ${mockAccount.accountMock.token}`);
         })
         .then((response) => {
-          console.log(response.body, 'this is the response');
           expect(response.status).toEqual(200);
           expect(response.body.title).toEqual(accountInstance.image.title);
           expect(response.body.url).toEqual(accountInstance.image.url);
@@ -63,13 +86,24 @@ describe('Testing routes at /images', () => {
     test('GET /images/:id should return a 404 error status code if sent with a bad id', () => {
       return pCreateImageMock()
         .then((mockAccount) => {
-          console.log(mockAccount.image, 'this is the mock image');
           return superagent.get(`${apiUrl}/images/thisIsAnInvalidId`)
             .set('Authorization', `Bearer ${mockAccount.accountMock.token}`);
         })
         .then(Promise.reject)
         .catch((err) => {
           expect(err.status).toEqual(404);
+        });
+    });
+
+    test('GET /images/:id should return a 401 error status code if sent with invalid token', () => {
+      return pCreateImageMock()
+        .then(() => {
+          return superagent.get(`${apiUrl}/images/thisIsAnInvalidId`)
+            .set('Authorization', 'Bearer');
+        })
+        .then(Promise.reject)
+        .catch((err) => {
+          expect(err.status).toEqual(401);
         });
     });
   });
@@ -83,6 +117,26 @@ describe('Testing routes at /images', () => {
         })
         .then((response) => {
           expect(response.status).toEqual(204);
+        });
+    });
+
+    test('DELETE /images/:id should return a 400 error status code if sent with a bad id', () => {
+      return superagent.delete(`${apiUrl}/images/thisIsAnInvalidId`)
+        .then(Promise.reject)
+        .catch((err) => {
+          expect(err.status).toEqual(400);
+        });
+    });
+
+    test('DELETE /images/:id should return a 401 error status code if sent with invalid token', () => {
+      return pCreateImageMock()
+        .then(() => {
+          return superagent.delete(`${apiUrl}/images/thisIsAnInvalidId`)
+            .set('Authorization', 'Bearer');
+        })
+        .then(Promise.reject)
+        .catch((err) => {
+          expect(err.status).toEqual(401);
         });
     });
   });

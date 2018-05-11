@@ -18,18 +18,14 @@ imageRouter.post('/images', bearerAuthMiddleware, multerUpload.any(), (request, 
   }
 
   if (!request.body.title || request.files.length > 1 || request.files[0].fieldname !== 'image') {
-    console.log('this is the request.body');
     return next(new HttpError(400, 'IMAGE ROUTER ERROR, invalid request'));
   } 
 
   const file = request.files[0];
-  console.log(file, 'this is the file');
   const key = `${file.filename}.${file.originalname}`;
-  console.log(key, 'this is the key');
 
   return s3Upload(file.path, key)
     .then((awsUrl) => {
-      console.log(awsUrl, 'inside the s3upload');
       return new Image({
         title: request.body.title,
         account: request.account._id,
@@ -53,15 +49,15 @@ imageRouter.get('/images/:id', bearerAuthMiddleware, (request, response, next) =
     .catch(next);
 });
 
-imageRouter.delete('/images/:id', bearerAuthMiddleware, (request, response, next) => {
-  return Image.findByIdAndRemove(request.params.id)
+imageRouter.delete('/images/:id', bearerAuthMiddleware, (request, response, next) => {  
+  return Image.findById(request.params.id)
     .then((image) => {
-      if (!image) {
+      if (!image._id) {
         return next(new HttpError(404, 'DELETE - image not found'));
       }
-      logger.log(logger.INFO, 'DELETE IMAGE SUCCESSFUL');
-      return response.sendStatus(204);
-    });
+      return s3Remove(image.url);
+    })
+    .then(() => response.sendStatus(204));
 });
 
 export default imageRouter;

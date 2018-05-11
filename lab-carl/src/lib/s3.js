@@ -3,7 +3,6 @@
 import fs from 'fs-extra'; // used to remove documents
 
 const s3Upload = (path, key) => {
-  console.log('inside s3 with path and key', path, key);
   const aws = require('aws-sdk');
   const amazons3 = new aws.S3();
 
@@ -17,10 +16,8 @@ const s3Upload = (path, key) => {
   return amazons3.upload(uploadOptions)
     .promise() // this comes from aws and calls the interal calllback of the upload method
     .then((response) => {
-      console.log(response, 'response from s3');
       return fs.remove(path)
         .then(() => {
-          console.log(response.Location, 'this is the response location');
           return response.Location;
         }) // response.location maps to the upload url link location
         .catch(err => Promise.reject(err));
