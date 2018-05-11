@@ -1,0 +1,36 @@
+{
+  "name": "16-19-auth",
+  "version": "1.0.0",
+  "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 16: Basic Authentication\r ======",
+  "main": "index.js",
+  "dependencies": {
+    "babel-eslint": "^8.2.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "eslintrc": "^1.0.6",
+    "jest": "^22.4.3",
+    "mongoose": "^5.0.17",
+    "superagent": "^3.8.3"
+  },
+  "devDependencies": {
+    "http-error": "0.0.6",
+    "logger": "0.0.1"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spinaltaper/16-19-auth.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spinaltaper/16-19-auth/issues"
+  },
+  "homepage": "https://github.com/spinaltaper/16-19-auth#readme"
+}

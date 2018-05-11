@@ -21,7 +21,7 @@ Configure the root of your repository with the following files and directories. 
 * **.eslintignore** - contains the course linter ignore configuration
 * **package.json** - contains npm package config
   * create a `test` script for running tests
-  * create `dbon` and `dboff` scripts for managing the mongo daemon
+  * create `toudbon` and `dboff` scripts for managing the mongo daemon
 * **db/** - contains mongodb files **(should be git ignored)**
 * **index.js** - entry-point of the application
 * **src/** - contains the remaining code

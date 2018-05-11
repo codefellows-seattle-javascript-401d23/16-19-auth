@@ -1,0 +1,11 @@
+    "babel-preset-env": "^1.6.1",
+    "babel-register": "^6.26.0",
+    "body-parser": "^1.18.2",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jest": "^21.15.1",
+    "eslintrc": "^1.0.6",
+    "jest": "^22.4.3",
+    "mongoose": "^5.0.17",
+    "superagent": "^3.8.3",
+    "babel-eslint": "^8.2.3"
