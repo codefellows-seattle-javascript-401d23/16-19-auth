@@ -5,6 +5,7 @@ import logger from './logger';
 export default (error, request, response, next) => { // eslint-disable-line no-unused-vars
   logger.log(logger.ERROR, '__ERROR_MIDDLEWARE__');
   logger.log(logger.ERROR, error);
+  // console.log(error);
 
   if (error.status) {
     logger.log(logger.INFO, `Responding with a ${error.status} code and message ${error.message}`);
