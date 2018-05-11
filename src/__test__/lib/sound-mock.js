@@ -1,7 +1,7 @@
 'use strict';
 
 import faker from 'faker';
-import { pCreateAccountMock, pRemoveAccountMock } from '../lib/account-mock';
+import { pCreateAccountMock } from '../lib/account-mock';
 import Sound from '../../model/sound';
 import Account from '../../model/account';
 
