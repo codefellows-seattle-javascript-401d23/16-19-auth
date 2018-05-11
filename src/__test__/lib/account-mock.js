@@ -14,7 +14,7 @@ const pCreateAccountMock = () => {
   return Account.create(mock.request.username, mock.request.email, mock.request.password)
     .then((account) => {
       mock.account = account;
-      return account.createToken();
+      return account.pCreateToken();
     })
     .then((token) => {
       mock.token = token;

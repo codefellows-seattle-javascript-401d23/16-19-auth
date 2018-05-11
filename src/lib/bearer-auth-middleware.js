@@ -34,7 +34,7 @@ export default (request, response, next) => {
     })
     .then((account) => {
       if (!account) {
-        throw new HttpError(404, '__ERROR__ not found');
+        return next(new HttpError(404, '__ERROR__ not found'));
       }
       request.account = account;
       return next();
