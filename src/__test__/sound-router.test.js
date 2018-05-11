@@ -47,14 +47,15 @@ describe('TESTING ROUTES AT /sounds', () => {
     });
     test('POST /sounds should return a 401 status code', () => {
       return pCreateSoundMock()
-        .then(() => {
+        .then((mockResponse) => {
           return superagent.post(`${apiUrl}/sounds`)
             .set('Authorization', 'Bearer ')
-            .send({});
-        })
-        .then(Promise.reject)
-        .catch((error) => {
-          expect(error.status).toEqual(401);
+            .field('title', 'titletest')
+            .attach('sound', `${__dirname}/asset/soprano.wav`)
+            .then(Promise.reject)
+            .catch((error) => {
+              expect(error.status).toEqual(401);
+            });
         });
     });
     test('GET /sounds should get a 200 status code and a TOKEN', () => {
