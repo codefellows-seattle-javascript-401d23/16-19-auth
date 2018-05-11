@@ -4,9 +4,9 @@ import HttpError from 'http-errors';
 import jsonWebToken from 'jsonwebtoken';
 import Account from '../model/account';
 
-const promisify = callbackStyleFunction => (...args) => {
+const promisify = fn => (...args) => {
   return new Promise((resolve, reject) => {
-    callbackStyleFunction(...args, (error, data) => {
+    fn(...args, (error, data) => {
       if (error) {
         return reject(error);
       }
@@ -22,7 +22,7 @@ export default (request, response, next) => {
   const token = request.headers.authorization.split('Bearer ')[1];
 
   if (!token) {
-    return next(new HttpError(401, 'AUTH - invalid request'));
+    return next(new HttpError(400, 'AUTH - invalid request'));
   }
   return promisify(jsonWebToken.verify)(token, process.env.STUFF_SECRET)
     .catch((error) => {
