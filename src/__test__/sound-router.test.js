@@ -45,9 +45,9 @@ describe('TESTING ROUTES AT /sounds', () => {
           expect(response.status).toEqual(400);
         });
     });
-    test('POST /sounds should return a 401 status code', () => {
+    test('POST /sounds should return a 401 status code for no token', () => {
       return pCreateSoundMock()
-        .then((mockResponse) => {
+        .then(() => {
           return superagent.post(`${apiUrl}/sounds`)
             .set('Authorization', 'Bearer ')
             .field('title', 'titletest')
@@ -74,25 +74,17 @@ describe('TESTING ROUTES AT /sounds', () => {
     });
   });
   describe('GET  401 for a succesful get from /sounds', () => {
-    test('should return a 401', () => { 
-      let testMock = null;
-      return pCreateSoundMock()
-        .then((mockResponse) => {
-          testMock = mockResponse.sound;
-          const { token } = mockResponse.accountMock;
-          return superagent.get(`${apiUrl}/sounds/${testMock._id}`)
-            .set('Authorization', `Bearer ${token}`)
-            .then((response) => {
-              expect(response.status).toEqual(401);
-              expect(response.body.title).toEqual(testMock.title);
-              expect(response.body._id).toBeTruthy();
-              expect(response.body.url).toBeTruthy();
-            });
-        })
-        .catch((err) => {
-          expect(err.status).toEqual(401);
-        });
-    });
+    return pCreateSoundMock()
+      .then(() => {
+        return superagent.post(`${apiUrl}/sounds`)
+          .set('Authorization', 'Bearer ')
+          .field('title', 'titletest')
+          .attach('sound', `${__dirname}/asset/soprano.wav`)
+          .then(Promise.reject)
+          .catch((error) => {
+            expect(error.status).toEqual(401);
+          });
+      });
   });
   test('GET /sounds should respond with 404 if there is no sounds to be found', () => {
     return superagent.get(`${apiUrl}/sounds`)
