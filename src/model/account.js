@@ -28,13 +28,13 @@ const accountSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  createdOn: {
+  timeStamp: {
     type: Date,
     default: () => new Date(),
   },
 });
 
-// Vinicio - This functios is going to be used to login
+//  login function
 function verifyPassword (password) {
   return bcrypt.compare(password, this.passwordHash)
     .then((result) => {
@@ -54,7 +54,7 @@ function pCreateToken() {
       // sign method = encypt
       return jsonWebToken.sign(
         { tokenSeed: account.tokenSeed },
-        process.env.SOUND_CLOUD_SECRET,
+        process.env.PICTURE_CLOUD_SECRET,
       ); // token is now encrypted
     });
   // TODO: error management here

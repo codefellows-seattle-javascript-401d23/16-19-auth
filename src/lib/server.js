@@ -4,9 +4,10 @@ import express from 'express';
 import mongoose from 'mongoose';
 import logger from './logger';
 import authRoutes from '../route/router';
-import profileRoutes from '../route/profile-router';
-import loggerMiddleware from './logger-middleware';
 import errorMiddleware from './error-middleware';
+import loggerMiddleware from './logger-middleware';
+import pictureRoutes from '../route/picture-router';
+import profileRoutes from '../route/profile-router';
 
 const app = express();
 let server = null;
@@ -15,6 +16,7 @@ let server = null;
 app.use(loggerMiddleware); // middleware
 app.use(authRoutes);
 app.use(profileRoutes);
+app.use(pictureRoutes);
 //---------------------------------------------------------------------------------
 // (2) link in the chain
 app.all('*', (request, response) => {
