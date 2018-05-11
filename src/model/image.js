@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 
-const soundSchema = mongoose.Schema({
+const imageSchema = mongoose.Schema({
   title: { 
     type: String,
     required: true,
@@ -21,4 +21,4 @@ const soundSchema = mongoose.Schema({
   },
 });
 
-export default mongoose.model('sound', soundSchema);
+export default mongoose.model('image', imageSchema);

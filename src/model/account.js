@@ -51,7 +51,7 @@ function pCreateToken() {
     .then((account) => {
       return jsonWebToken.sign(
         { tokenSeed: account.tokenSeed },
-        process.env.SOUND_CLOUD_SECRET,
+        process.env.IMAGE_CLOUD_SECRET,
       );
     });
 }

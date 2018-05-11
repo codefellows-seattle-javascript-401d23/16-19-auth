@@ -26,7 +26,7 @@ export default (request, response, next) => {
     return next(new HttpError(401, '__ERROR__ token required'));
   }
 
-  return promisify(jsonWebToken.verify)(token, process.env.SOUND_CLOUD_SECRET)
+  return promisify(jsonWebToken.verify)(token, process.env.IMAGE_CLOUD_SECRET)
     .catch(error => Promise.reject(new HttpError(401, error)))
     .then((decryptedData) => {
       return Account.findOne({ tokenSeed: decryptedData.tokenSeed });
