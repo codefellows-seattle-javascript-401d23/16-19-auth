@@ -52,8 +52,10 @@ function verifyPassword(password) {
 function createToken() {
   // 'this' is equal to the account object we are working with.
   this.tokenSeed = crypto.randomBytes(TOKEN_SEED_LENGTH).toString('hex');
+  console.log('token Seed', this.tokenSeed);
   return this.save()
     .then((account) => {
+      console.log('account.js', account);
     // at this point we have a tokenSeed.
     // .sign === encrypt, this line returns a promise which resolves to a token.
       return jsonWebToken.sign(
