@@ -73,7 +73,7 @@ describe('TESTING ROUTES AT /sounds', () => {
         });
     });
   });
-  test('GET  401 for a succesful get from /sounds', () => {
+  test('GET  /sounds should respond with 401 for no token', () => {
     return pCreateSoundMock()
       .then(() => {
         return superagent.post(`${apiUrl}/sounds`)
@@ -86,7 +86,7 @@ describe('TESTING ROUTES AT /sounds', () => {
           });
       });
   });
-  test('GET /sounds should respond with 404 if there is no sounds to be found', () => {
+  test('GET /sounds should respond with 404 for wrong ID or no resource', () => {
     return superagent.get(`${apiUrl}/sounds`)
       .then(Promise.reject)
       .catch((response) => {
@@ -103,6 +103,19 @@ describe('TESTING ROUTES AT /sounds', () => {
           .set('Authorization', `Bearer ${token}`)
           .then((response) => {
             expect(response.status).toEqual(204);
+          });
+      });
+  });
+  test('DELETE /sound  404 for wrong ID or no resource', () => {
+    return pCreateSoundMock()
+      .then(() => {
+        return superagent.delete(`${apiUrl}/sounds`)
+          .set('Authorization', 'Bearer ')
+          .field('title', 'titletest')
+          .attach('sound', `${__dirname}/asset/soprano.wav`)
+          .then(Promise.reject)
+          .catch((error) => {
+            expect(error.status).toEqual(404);
           });
       });
   });
