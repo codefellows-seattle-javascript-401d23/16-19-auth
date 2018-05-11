@@ -106,12 +106,25 @@ describe('TESTING ROUTES AT /sounds', () => {
           });
       });
   });
+  test('DELETE /sounds should respond with a 401 for no token', () => {
+    let testMock = null;
+    return pCreateSoundMock()
+      .then((mockResponse) => {
+        testMock = mockResponse.sound;
+        return superagent.delete(`${apiUrl}/sounds/${testMock._id}`)
+          .set('Authorization', 'Bearer ')
+          .then(Promise.reject)
+          .catch((error) => {
+            expect(error.status).toEqual(401);
+          });
+      });
+  });
   test('DELETE /sound  404 for wrong ID or no resource', () => {
     return pCreateSoundMock()
       .then(() => {
         return superagent.delete(`${apiUrl}/sounds`)
           .set('Authorization', 'Bearer ')
-          .field('title', 'titletest')
+          .field('title', 'title')
           .attach('sound', `${__dirname}/asset/soprano.wav`)
           .then(Promise.reject)
           .catch((error) => {
