@@ -16,11 +16,13 @@ describe('TESTING ROUTES AT /item', () => {
       return pCreateItemMock()
         .then((mockResponse) => {
           const { token } = mockResponse.accountMock;
+          console.log(mockResponse);
           return superagent.post(`${apiURL}/item`)
             .set('Authorization', `Bearer ${token}`)
             .field('title', 'josh-pic')
             .attach('item', `${__dirname}/asset/josh.jpg`)
             .then((response) => {
+              console.log('TEST RESPONSE', response);
               expect(response.status).toEqual(200);
               expect(response.body.title).toEqual('josh-pic');
               expect(response.body._id).toBeTruthy();
