@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import logger from './logger';
 import authRoutes from '../route/auth-router';
 import profileRoutes from '../route/profile-router';
+import itemRoutes from '../route/item-router';
 import loggerMiddleware from './logger-middleware';
 import errorMiddleware from './error-middleware';
 
@@ -14,6 +15,7 @@ let server = null;
 app.use(loggerMiddleware);
 app.use(authRoutes);
 app.use(profileRoutes);
+app.use(itemRoutes);
 app.all('*', (request, response) => {
   logger.log(logger.INFO, 'Returning a 404 from the catch-all/default route');
   return response.sendStatus(404);
@@ -26,16 +28,23 @@ const startServer = () => {
       server = app.listen(process.env.PORT, () => {
         logger.log(logger.INFO, `Server is listening on port ${process.env.PORT}`);
       });
+      return undefined;
+    })
+    .catch((err) => {
+      logger.log(logger.ERROR, `something happended, ${JSON.stringify(err)}`);
     });
 };
 
 const stopServer = () => {
   return mongoose.disconnect()
     .then(() => {
-      console.log('!!!!THIS IS THE SEVER AT STOP SERVER', server);
+      // console.log('!!!!THIS IS THE SEVER AT STOP SERVER', server);
       server.close(() => {
         logger.log(logger.INFO, 'Server is off');
       });
+    })
+    .catch((err) => {
+      return logger.log(logger.ERROR, `something happend, ${JSON.stringify(err)}`);
     });
 };
 

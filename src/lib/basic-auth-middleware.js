@@ -19,6 +19,7 @@ export default (request, response, next) => {
   if (!username || !password) {
     return next(new HttpError(400, 'AUTH - invalid request'));
   }
+
   return Account.findOne({ username })
     .then((account) => {
       if (!account) {

@@ -1,12 +1,12 @@
 'use strict';
 
-import HttpError from 'http-errors';
 import jsonWebToken from 'jsonwebtoken';
+import HttpError from 'http-errors';
 import Account from '../model/account';
 
-const promisify = callbackStyleFunction => (...args) => {
+const promisify = fn => (...args) => {
   return new Promise((resolve, reject) => {
-    callbackStyleFunction(...args, (error, data) => {
+    fn(...args, (error, data) => {
       if (error) {
         return reject(error);
       }

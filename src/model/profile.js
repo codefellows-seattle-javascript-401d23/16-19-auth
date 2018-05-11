@@ -9,9 +9,11 @@ const profileSchema = mongoose.Schema({
   },
   middleName: { type: String },
   aboutMe: { type: String },
-  myPic: { type: String },
+  myItem: { type: String },
   account: {
     type: mongoose.Schema.ObjectId,
+    required: true,
+    unique: true,
   },
 });
 
