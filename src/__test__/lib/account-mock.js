@@ -9,7 +9,7 @@ const pCreateAccountMock = () => {
   mock.request = {
     username: faker.internet.userName(),
     email: faker.internet.email(),
-    password: faker.lorem.words(5),
+    password: faker.lorem.words(1),
   };
   return Account.create(mock.request.username, mock.request.email, mock.request.password)
     .then((account) => {

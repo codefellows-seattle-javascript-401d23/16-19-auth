@@ -1,7 +1,7 @@
 'use strict';
 
-import HttpError from 'http-errors';
 import jsonWebToken from 'jsonwebtoken';
+import HttpError from 'http-errors';
 import Account from '../model/account';
 
 const promisify = fn => (...args) => {
