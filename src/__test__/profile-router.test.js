@@ -9,7 +9,7 @@ const apiURL = `http://localhost:${process.env.PORT}`;
 
 describe('POST /profiles', () => {
   beforeAll(startServer);
-  afterAll(stopServer());
+  afterAll(stopServer);
   afterEach(pRemoveProfileMock);
 
   test('POST /profiles should get a 200 and a newly created profile', () => {

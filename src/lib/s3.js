@@ -13,7 +13,7 @@ const s3Upload = (path, key) => {
     Body: fs.createReadStream(path),
   };
   return amazonS3.upload(uploadOptions)
-    .promise() // this calls internal callback
+    .promise()
     .then((response) => {
       return fs.remove(path)
         .then(() => response.Location)

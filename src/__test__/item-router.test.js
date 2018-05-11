@@ -19,7 +19,7 @@ describe('TESTING ROUTES AT /item', () => {
           return superagent.post(`${apiURL}/item`)
             .set('Authorization', `Bearer ${token}`)
             .field('title', 'josh-pic')
-            .attach('sound', `${__dirname}/asset/josh.jpg`)
+            .attach('item', `${__dirname}/asset/josh.jpg`)
             .then((response) => {
               expect(response.status).toEqual(200);
               expect(response.body.title).toEqual('josh-pic');
@@ -28,7 +28,7 @@ describe('TESTING ROUTES AT /item', () => {
             });
         })
         .catch((err) => {
-          console.log(err.message, 'ERROR IN TEST');
+          // console.log(err.message, 'ERROR IN TEST');
           expect(err.status).toEqual(200);
         });
     });

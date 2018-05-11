@@ -1,7 +1,7 @@
 'use strick';
 
 import faker from 'faker';
-import { pCreateAccountMock, pRemoveAccountMock} from './account-mock';
+import { pCreateAccountMock } from './account-mock';
 import Item from '../../model/item';
 import Account from '../../model/account';
 
@@ -24,3 +24,5 @@ const pCreateItemMock = () => {
 };
 
 const pRemoveItemMock = () => Promise.all([Account.remove({}), Item.remove({})]);
+
+export { pCreateItemMock, pRemoveItemMock };
