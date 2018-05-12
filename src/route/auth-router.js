@@ -15,7 +15,7 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
   return Account.create(request.body.username, request.body.email, request.body.password)
     .then((account) => {
       delete request.body.password;
-      logger.log(logger.INFO, 'AUTH - creating TOKEN');
+      logger.log(logger.INFO, 'AUTH Hello? - creating TOKEN');
       return account.pCreateToken();
     })
     .then((token) => {
