@@ -44,6 +44,7 @@ describe('POST /profiles', () => {
         return superagent.post(`${apiURL}/profiles`)
           .set('Authorization', `Bearer ${accountSetMock.token}`)
           .send({
+            bio: 'I am a walrus',
           });
       })
       .then((response) => {

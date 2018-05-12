@@ -11,7 +11,7 @@ const multerUpload = multer({ dest: `${__dirname}/..temp` });
 
 const imageRouter = new Router();
 
-imageRouter.post('/sounds', bearerAuthMiddleWare, multerUpload.any(), (request, response, next) => {
+imageRouter.post('/images', bearerAuthMiddleWare, multerUpload.any(), (request, response, next) => {
   if (!request.account) {
     return next(new HttpError(404, 'IMAGE ROUTER _ERROR_, not found'));
   }
