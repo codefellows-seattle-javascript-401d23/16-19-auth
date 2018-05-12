@@ -1,7 +1,7 @@
 'use strict';
 
 import faker from 'faker';
-import { pCreateAccountMock } from './account-mock'; // TODO: pRemoveAccountMock is defined but never used
+import { pCreateAccountMock, pRemoveAccountMock } from './account-mock'; // TODO: pRemoveAccountMock is defined but never used
 import Image from '../../model/image'; //
 import Account from '../../model/account'; //
 
@@ -13,8 +13,8 @@ const pCreateImageMock = () => {
         mockAcctResponse;
 
       return new Image({
-        url: faker.lorem.words(1),
         artist: faker.lorem.words(1),
+        url: faker.random.image(),
         account: resultMock.accountMock.account._id,
       }).save();
     })

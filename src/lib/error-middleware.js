@@ -30,6 +30,5 @@ export default (error, request, response, next) => { // eslint-disable-line no-u
     return response.sendStatus(401);
   }
   logger.log(logger.ERROR, 'ERROR MIDDLEWARE6: Responding with a 500 error code');
-  logger.log(logger.ERROR, error);
   return response.sendStatus(500);
 };

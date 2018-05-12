@@ -3,12 +3,13 @@
 import mongoose from 'mongoose';
 
 const imageSchema = mongoose.Schema({
-  url: {
+  artist: {
     type: String,
     required: true,
   },
-  artist: {
+  url: {
     type: String,
+    required: true,
   },
   genre: { type: String },
   camera: { type: String },
