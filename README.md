@@ -9,7 +9,7 @@ This program creates an account and saves it's users password securely, and send
 
 ## Getting Started
 
-To start server please verify that you have installed mongoDB and mongoose then run the following code in your command line `npm run dbon`. 
+To start server please verify that you have installed mongoDB and mongoose then run the following code in your command line `npm run dbon`.
 
 This will allow us to connect to our MongoDB (process.env.MONGODB_URI).  Mongoose acts as the middleware that connects us from our computer to the MongoDB. 
 
@@ -30,3 +30,15 @@ profileRouter.post() sends a request to create a new profile to the server. Upon
 ##### profileRouter.get()
 
 profileRouter.get() sends a request to retrieve a profile from the server. Upon success the server will return a 200 success message. If there is faulty data entered then server will display a 400 error and error message will read 'Responding with a 400 error code.' If no profile can be located then the server will display a 404 error message. 
+
+##### imageRouter.post()
+
+imageRouter.post() sends a request to create a new image and upload it to an AWS. Upon success the server will return a 200 success message. If there is faulty data entered then server will display a 400 error and error message will read 'Responding with a 400 error code.' The server will throw a 401 for invalid authorization.
+
+##### imageRouter.get()
+
+imageRouter.get() sends a request to retrieve an uploaded image from the AWS. Upon success the server will return a 200 success message. If no profile can be located then the server will display a 404 error message.' The server will throw a 401 for invalid authorization.
+
+##### imageRouter.delete()
+
+imageRouter.delete() sends a request to remove a profile from the AWS. Upon success the server will return a 204 success message. If there is faulty data entered then the server will display a 400 error and error message will read 'Responding with a 400 error code.' If no profile can be located then the server will display a 404 error message.
