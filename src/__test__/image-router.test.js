@@ -58,7 +58,30 @@ describe('Testing routes at /images', () => {
     });
   });
 
-  
+  describe('POST 400 unsuccessful post to /images', () => {
+    test.only('the route should return 400 due to a bad request', () => {
+      jest.setTimeout(20000);
+      return pCreateImageMock()
+        .then((mockResponse) => {
+          const { token } = mockResponse.accountMock;
+          console.log(mockResponse.accountMock, 'before post');
+          return superagent.post(`${apiUrl}/images`)
+            .set('Authorization', `Bearer ${token}`)
+            .field('artist', '')
+            .attach('', `${__dirname}/assets/llama1.jpg`)
+            .then((response) => {
+              expect(response.status).toEqual(400);
+            });
+        })
+        .catch((err) => {
+          console.log(err.message, 'ERR IN TEST');
+          console.log(err.message, 'ERROR Status 400');
+          expect(err.status).toEqual(400);
+        });
+    });
+  });
+
+
   describe('GET 200 for successful get from /images', () => {
     test('the route should return a 200 for successful image retrieved', () => {
       return pCreateImageMock()
