@@ -14,6 +14,10 @@ const accountSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  // username: {
+  //   type: String,
+  //   required: true,
+  // },
   email: {
     type: String,
     required: true,
@@ -24,23 +28,23 @@ const accountSchema = mongoose.Schema({
     required: true,
     unique: true,
   },
-  createdOn: {
+  timeStamp: {
     type: Date,
     default: () => new Date(),
   },
 });
 
-// Vinicio - This functios is going to be used to login
-// function verifyPassword (password) {
-//   return bcrypt.compare(password, this.passwordHash)
-//     .then((result) => {
-//       if (!result) {
-//         // Vinicio - A 401 code would be the 'proper' response
-//         throw new HttpError(400, 'AUTH - incorrect data');
-//       }
-//       return this;
-//     });
-// }
+//  login function
+function verifyPassword (password) {
+  return bcrypt.compare(password, this.passwordHash)
+    .then((result) => {
+      if (!result) {
+        // Vinicio - A 401 code would be the 'proper' response
+        throw new HttpError(400, 'AUTH - incorrect data');
+      }
+      return this;
+    });
+}
 
 function pCreateToken() {
   this.tokenSeed = crypto.randomBytes(TOKEN_SEED_LENGTH).toString('hex');
@@ -50,7 +54,7 @@ function pCreateToken() {
       // sign method = encypt
       return jsonWebToken.sign(
         { tokenSeed: account.tokenSeed },
-        process.env.SOUND_CLOUD_SECRET,
+        process.env.PICTURE_CLOUD_SECRET,
       ); // token is now encrypted
     });
   // TODO: error management here
