@@ -4,6 +4,7 @@ import faker from 'faker';
 import Song from '../../model/song';
 import { pCreateAccountMock, pRemoveAccountMock } from './account-mock';
 
+
 const pCreateSongMock = () => {
   const resultMock = {};
   return pCreateAccountMock()
