@@ -1,11 +1,11 @@
 **Author**: Daniel Shelton
-**Version**: 1.0.1
+**Version**: 1.1.4
 
 # Overview
-This is an application which performs CRUD operations via the Express framework to retreive, edit, add, and/or delete data from a MongoDB database consisting of accounts which have user-names, emails, passwords and that generate tokens per successful login/signup.
+This is an application which performs CRUD operations via the Express framework to retreive, edit, add, and/or delete data from a MongoDB database consisting of accounts, profiles, and images. Account Schemas have user-names, emails, passwords and that generate tokens per successful login/signup. Profile Schemas consist of first names, birthdate, favorite quote, an avatar, as well as being associated with an account. Users are able to upload images to their profiles.
 
 # Architecture
-The main point of entry of this application is the index.js file which transpiles the app by utilizing the babel library. This application also utilizes multiple NPM libraries and .travis.yml for its CI. The 'lib' directory contains all the helper modules. The '__test__' directory contains the testing suite.
+The main point of entry of this application is the index.js file which transpiles the app by utilizing the babel library. This application also utilizes multiple NPM libraries and .travis.yml for its CI. The 'lib' directory contains all the helper modules. The '__test__' directory contains the testing suite. This application utilizes a MongoDB database and is currently deployed via Heroku. 
 
 # Paths
 
@@ -52,10 +52,38 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
     })
     .catch(next);
 });
+```
 
+IMAGE-POST ROUTE: Allows a user to post a new image to their profile.
+```javaScript
+imageRouter.post('/images', bearerAuthMiddleware, multerUpload.any(), (request, response, next) => {
+  if (!request.account) {
+    return next(new HttpError(404, 'IMAGE ROUTER ERROR, not found'));
+  }
+
+  if (!request.body.title || request.files.length > 1 || request.files[0].fieldname !== 'image') {
+    return next(new HttpError(400, 'IMAGE ROUTER ERROR: invalid request.'));
+  }
+
+  const file = request.files[0];
+  const key = `${file.filename}.${file.originalname}`;
+
+  return s3Upload(file.path, key)
+    .then((url) => {
+      return new Image({
+        title: request.body.title,
+        account: request.account._id,
+        url,
+      }).save();
+    })
+    .then(image => response.json(image))
+    .catch(next);
+});
 ```
 
 # Change Log
 
 05-07-2018 10:15PM - POST route established for authentication, POST testing complete.
 05-09-2018 8:02AM - POST route established for Profile, POST testing complete.
+05-11-2018 7:13PM - Image Schema added.
+05-13-2018 12:39PM - Site deployed.
