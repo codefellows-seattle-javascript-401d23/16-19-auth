@@ -13,12 +13,12 @@ const multerUpload = multer({ dest: `${__dirname}/temp` });
 const imageRouter = new Router();
 
 imageRouter.post('/images', bearerAuthMiddleWare, multerUpload.any(), (request, response, next) => {
-  console.log(request.account, 'hello there'); // the image is not attached to the account yet...
-  if (!request.account) { // TODO: Why is account not resolved???
+  // console.log(request.account, 'hello there'); // the image is not attached to the account yet...
+  if (!request.account) {
     return next(new HttpError(404, 'IMAGE ROUTER _ERROR_, not found'));
   }
-  console.log(request.body, 'hello there'); // the image mock is created by the time we get to  this line...
-  // TODO:  why is files unresolved???
+  // console.log(request.body, 'hello there'); // the image mock is created by the time we get to  this line...
+
   if (!request.body || request.files.length > 1 || request.files[0].fieldname !== 'image') {
     return next(new HttpError(400, 'IMAGE ROUTER __ERROR__ invalid request'));
   }

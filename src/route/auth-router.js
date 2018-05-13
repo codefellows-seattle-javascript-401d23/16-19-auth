@@ -29,7 +29,7 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
 });
 
 authRouter.get('/login', basicAuthMiddleware, (request, response, next) => {
-  if (!request.account) { // TODO:  why is account unresolved???
+  if (!request.account) {
     return next(new HttpError(404, '_ERROR_ not found'));
   }
 

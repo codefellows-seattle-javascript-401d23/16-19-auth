@@ -17,7 +17,7 @@ describe('Testing routes at /images', () => {
       return pCreateImageMock()
         .then((mockResponse) => {
           const { token } = mockResponse.accountMock;
-          console.log(mockResponse.accountMock, 'before post');
+          // console.log(mockResponse.accountMock, 'before post');
           return superagent.post(`${apiUrl}/images`)
             .set('Authorization', `Bearer ${token}`)
             .field('artist', 'llama1')
@@ -43,7 +43,7 @@ describe('Testing routes at /images', () => {
       return pCreateImageMock()
         .then((mockResponse) => {
           const { token } = mockResponse;
-          console.log(mockResponse.accountMock, 'before post');
+          // console.log(mockResponse.accountMock, 'before post');
           return superagent.post(`${apiUrl}/images`)
             .set('Authorization', `Bearer ${token}`)
             .field('artist', 'llama1')
@@ -59,12 +59,12 @@ describe('Testing routes at /images', () => {
   });
 
   describe('POST 400 unsuccessful post to /images', () => {
-    test('the route should return 400 due to a bad request', () => {
+    test('the route should return 400 due to a bad request if there are missing fields in the multi-form upload', () => {
       jest.setTimeout(20000);
       return pCreateImageMock()
         .then((mockResponse) => {
           const { token } = mockResponse.accountMock;
-          console.log(mockResponse.accountMock, 'before post');
+          // console.log(mockResponse.accountMock, 'before post');
           return superagent.post(`${apiUrl}/images`)
             .set('Authorization', `Bearer ${token}`)
             .field('artist', '')
@@ -87,7 +87,7 @@ describe('Testing routes at /images', () => {
       return pCreateImageMock()
         .then((mockResponse) => {
           const { token } = mockResponse.accountMock;
-          console.log(mockResponse.accountMock, 'mock inside the get route');
+          // console.log(mockResponse.accountMock, 'mock inside the get route');
           return superagent.get(`${apiUrl}/images/:id`)
             .set('Authorization', `Bearer ${token}`);
         })

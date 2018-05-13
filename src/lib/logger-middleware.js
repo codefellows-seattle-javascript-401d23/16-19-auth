@@ -7,4 +7,3 @@ export default (request, response, next) => {
   return next(); // important or the chain will stop...
 };
 
-// TODO:  Do I need this file anymore???

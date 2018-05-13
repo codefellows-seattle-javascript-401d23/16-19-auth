@@ -9,7 +9,7 @@ const s3Upload = (path, key) => {
     Bucket: process.env.AWS_BUCKET,
     Key: key,
     ACL: 'public-read',
-    Body: fs.createReadStream(path), // TODO: fs function unresolved
+    Body: fs.createReadStream(path),
   };
 
   return amazonS3.upload(uploadOptions)
@@ -28,7 +28,7 @@ const s3Upload = (path, key) => {
 };
 
 
-// TODO: adding s3 getObject method for http GET route.
+// TODO: Turns out I didn't need this but keeping it in case I want to add future functionality.
 const s3Get = (key) => {
   const aws = require('aws-sdk');
   const amazonS3 = new aws.S3();
@@ -40,7 +40,7 @@ const s3Get = (key) => {
   return amazonS3.getObject(getOptions)
     .promise()
     .then((data) => {
-      console.log(data, 'SUCCESSFUL GET OBJECT FROM S3 BUCKET');
+      // console.log(data, 'SUCCESSFUL GET OBJECT FROM S3 BUCKET');
     })
     .catch((err) => {
       Promise.reject(err);
