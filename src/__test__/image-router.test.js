@@ -59,7 +59,7 @@ describe('Testing routes at /images', () => {
   });
 
   describe('POST 400 unsuccessful post to /images', () => {
-    test.only('the route should return 400 due to a bad request', () => {
+    test('the route should return 400 due to a bad request', () => {
       jest.setTimeout(20000);
       return pCreateImageMock()
         .then((mockResponse) => {
@@ -82,16 +82,22 @@ describe('Testing routes at /images', () => {
   });
 
 
-  describe('GET 200 for successful get from /images', () => {
-    test('the route should return a 200 for successful image retrieved', () => {
+  describe('GET 200 for successful get from /images:id', () => {
+    test('the GET route should return a 200 for successful image retrieved', () => {
       return pCreateImageMock()
-        .then((mock) => {
-          console.log(mock, 'mock inside the get route');
-          return superagent.get(`${apiUrl}/images`)
-            .auth(mock.request.token, mock.request.password);
+        .then((mockResponse) => {
+          const { token } = mockResponse.accountMock;
+          console.log(mockResponse.accountMock, 'mock inside the get route');
+          return superagent.get(`${apiUrl}/images/:id`)
+            .set('Authorization', `Bearer ${token}`);
         })
         .then((response) => {
           expect(response.status).toEqual(200);
+        })
+        .catch((err) => {
+          console.log(err.message, 'ERR IN TEST');
+          console.log(err.message, 'ERROR STATUS 404');
+          expect(err.status).toEqual(200);
         });
     });
   });

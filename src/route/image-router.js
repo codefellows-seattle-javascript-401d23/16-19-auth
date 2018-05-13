@@ -5,7 +5,8 @@ import { Router } from 'express';
 import HttpError from 'http-errors';
 import bearerAuthMiddleWare from '../lib/bearer-auth-middleware';
 import Image from '../model/image';
-import { s3Upload, s3Get, s3Remove } from '../lib/s3';
+import { s3Upload } from '../lib/s3';
+import logger from '../lib/logger';
 
 const multerUpload = multer({ dest: `${__dirname}/temp` });
 
@@ -39,18 +40,17 @@ imageRouter.post('/images', bearerAuthMiddleWare, multerUpload.any(), (request, 
 });
 
 imageRouter.get('/images/:id', bearerAuthMiddleWare, (request, response, next) => {
-  if (!request.account._id) {
-    console.log(!request.account._id, 'inside the GET route...');
-    return next(new HttpError(400, 'IMAGE ROUTER _ERROR_, invalid request line 44'));
+  if (!request.headers.authorization) {
+    return next(new HttpError(401, 'IMAGE ROUTER _ERROR_, no id in request body'));
   }
-  console.log(response, 'in the GET');
-  return request;
-  // return Image.findById(request.params.id)
-  //   // .then((image) => {
-  //   //   console.log('in .then on the GET route');
-  //   //   return response.json(image);
-  //   // });
+  return Image.findById(request.params._id)
+    .then((image) => {
+      logger.log(logger.INFO, 'GET - responding with a 200 status code');
+      return response.json(image);
+    })
+    .catch(next);
 });
+
 
 imageRouter.delete('/images');
 

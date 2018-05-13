@@ -45,9 +45,7 @@ const s3Get = (key) => {
     .catch((err) => {
       Promise.reject(err);
     });
-
-
-}
+};
 
 const s3Remove = (key) => {
   const aws = require('aws-sdk');
@@ -68,4 +66,3 @@ const s3Remove = (key) => {
 };
 
 export { s3Upload, s3Get, s3Remove };
-
