@@ -16,6 +16,11 @@ const accountSchema = mongoose.Schema({
   username: {
     type: String,
     required: true,
+    unique: false,
+  },
+  tokenSeed: {
+    type: String,
+    required: true,
     unique: true,
   },
   email: {
