@@ -18,7 +18,6 @@ describe('TESTING ROUTES At /images', () => {
         jest.setTimeout(10000);
         return createImageMock()
           .then((mockResponse) => {
-            console.log('mockresponse', mockResponse);
             const { token } = mockResponse.accountMock;
             return superagent.post(`${apiURL}/images`)
               .set('Authorization', `Bearer ${token}`)
@@ -32,7 +31,6 @@ describe('TESTING ROUTES At /images', () => {
               });
           })
           .catch((error) => {
-            console.log(error);
             expect(error.status).toEqual(200);
           });
       });
