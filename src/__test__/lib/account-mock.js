@@ -2,14 +2,14 @@
 
 import faker from 'faker';
 import Account from '../../model/account';
-
+import logger from '../../lib/logger';
 
 const pCreateAccountMock = () => {
   const mock = {};
   mock.request = {
     username: faker.internet.userName(),
     email: faker.internet.email(),
-    password: faker.lorem.words(5),
+    password: faker.lorem.word(5),
   };
   return Account.create(mock.request.username, mock.request.email, mock.request.password)
     .then((account) => {
@@ -22,6 +22,7 @@ const pCreateAccountMock = () => {
     })
     .then((account) => {
       mock.account = account;
+      logger.log(logger.INFO, account);
       return mock;
     });
 };

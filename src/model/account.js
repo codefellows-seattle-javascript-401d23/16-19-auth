@@ -6,6 +6,9 @@ import crypto from 'crypto';
 import jsonWebToken from 'jsonwebtoken';
 import HttpError from 'http-errors';
 
+const HASH_ROUNDS = 8;
+const TOKEN_SEED_SIZE = 128;
+
 const accountSchema = mongoose.Schema({
   passwordHash: {
     type: String,
@@ -31,9 +34,6 @@ const accountSchema = mongoose.Schema({
     default: () => new Date(),
   },
 });
-
-const HASH_ROUNDS = 8;
-const TOKEN_SEED_SIZE = 128;
 
 function pVerifyPassword(password) {
   return bcrypt.compare(password, this.passwordHash)

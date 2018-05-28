@@ -40,7 +40,6 @@ describe('POST /profiles', () => {
     return pCreateAccountMock()
       .then((accountSetMock) => {
         accountMock = accountSetMock;
-        console.log(accountMock);
         return superagent.post(`${apiURL}/profiles`)
           .set('Authorization', `Bearer ${accountSetMock.token}`)
           .send({
