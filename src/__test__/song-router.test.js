@@ -3,7 +3,7 @@
 import superagent from 'superagent';
 import { startServer, stopServer } from '../lib/server';
 import { pCreateAccountMock } from './lib/account-mock';
-import { pCreateSongMock, pRemoveSongMock } from './lib/song-mock';
+import { pRemoveSongMock } from './lib/song-mock';
 
 const apiURL = `http://localhost:${process.env.PORT}`;
 
@@ -34,15 +34,15 @@ describe('POST /songs', () => {
       });
   });
 
-  test('GET /songs - the test should get a 200 if no errors and a song is returned', () => {
-    return pCreateSongMock()
-      .then((mock) => {
-        return superagent.get(`${apiURL}/songs`)
-          .auth(mock.request.username, mock.request.password);
-      })
-      .then((response) => {
-        expect(response.status).toEqual(200);
-        expect(response.body.token).toBeTruthy();
-      });
-  });
+  // test('GET /songs - the test should get a 200 if no errors and a song is returned', () => {
+  //   return pCreateSongMock()
+  //     .then((mock) => {
+  //       return superagent.get(`${apiURL}/songs`)
+  //         .auth(mock.request.username, mock.request.password);
+  //     })
+  //     .then((response) => {
+  //       expect(response.status).toEqual(200);
+  //       expect(response.body.token).toBeTruthy();
+  //     });
+  // });
 });

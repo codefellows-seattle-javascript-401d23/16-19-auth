@@ -1,15 +1,14 @@
 {
-  "name": "16-19-auth",
+  "name": "",
   "version": "1.0.0",
   "engines": {
     "node": "9.11"
   },
-  "description": "![cf](https://i.imgur.com/7v5ASc8.png) Lab 16: Basic Authentication ======",
+  "description": "Mike Castor's Code Fellows Lab-20 Deployment",
   "main": "index.js",
   "scripts": {
     "test": "eslint . && jest --coverage --forceExit --runInBand",
     "simpletest": "jest --coverage",
-    "eslint": "eslint",
     "dbon": "mkdir -p ./db && mongod --dbpath ./db",
     "dboff": "killall mongod",
     "build": "babel src -d build",
@@ -21,7 +20,7 @@
     ]
   },
   "keywords": [],
-  "author": "",
+  "author": "Mike Castor",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/vibecastor/16-19-auth/issues"

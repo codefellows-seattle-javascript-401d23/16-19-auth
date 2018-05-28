@@ -3,7 +3,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import logger from './logger';
-import accountRouter from '../route/auth-router';
+import authRouter from '../route/auth-router';
 import songRouter from '../route/song-router';
 import imageRouter from '../route/image-router';
 import errorMiddleWare from './error-middleware';
@@ -12,7 +12,7 @@ const app = express();
 let server = null;
 
 // #1 in chain
-app.use(accountRouter);
+app.use(authRouter);
 app.use(songRouter);
 app.use(imageRouter);
 
