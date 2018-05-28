@@ -10,10 +10,11 @@ const pCreateAccountMock = () => {
     email: faker.internet.email(),
     password: faker.lorem.words(5),
   };
+
   return Account.create(mock.request.username, mock.request.email, mock.request.password)
     .then((account) => {
       mock.account = account;
-      return account.createToken();
+      return account.createToken(); // Todo: this line is messing up the GET
     })
     .then((token) => {
       mock.token = token;

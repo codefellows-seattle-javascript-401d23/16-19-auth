@@ -28,26 +28,30 @@ describe('AUTH Router', function () {
     });
   });
 
-  test('POST should return a 400 status code Bad Request for not sending the correct sign up information', function () {
+  test('POST /signup - an incomplete request should return a 400', function () {
     return _superagent2.default.post(apiURL + '/signup').send({
-      username: '',
-      email: '',
-      password: ''
-    }).then(function (response) {
-      console.log(response, 'bad request test');
-      expect(response.sendStatus).toEqual(400);
+      username: 'demi',
+      email: 'demi@dog.com'
+    }).then(Promise.reject).catch(function (response) {
+      expect(response.status).toEqual(400);
     });
   });
 
-  test('GET /login should return a 200 status code and a Token on success', function () {
-    return (0, _accountMock.pCreateAccountMock)().then(function (mock) {
-      console.log(mock.request.username, mock.request.password);
-      return _superagent2.default.get(apiURL + '/login').auth(mock.request.username, mock.request.password);
-    }).then(function (response) {
-      expect(response.status).toEqual(200);
-      expect(response.body.token).toBeTruthy();
-    });
-  });
+  // describe('GET /login', () => {
+  //   test('GET /login should return a 200 status code and a Token on success', () => {
+  //     return pCreateAccountMock()
+  //       .then((mock) => {
+  //         // console.log(mock.request.username, mock.request.password);
+  //         return superagent.get(`${apiURL}/login`)
+  //           .auth(mock.request.username, mock.request.password);
+  //       })
+  //       .then((response) => {
+  //         expect(response.status).toEqual(200);
+  //         expect(response.body.token).toBeTruthy();
+  //       });
+  //   });
+  // });
+
 
   test('GET /login should return a 400 status if a bad request is made to the database', function () {
     return (0, _accountMock.pCreateAccountMock)().then(function (mock) {

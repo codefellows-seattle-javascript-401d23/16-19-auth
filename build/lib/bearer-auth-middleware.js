@@ -4,13 +4,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _httpErrors = require('http-errors');
-
-var _httpErrors2 = _interopRequireDefault(_httpErrors);
-
 var _jsonwebtoken = require('jsonwebtoken');
 
 var _jsonwebtoken2 = _interopRequireDefault(_jsonwebtoken);
+
+var _httpErrors = require('http-errors');
+
+var _httpErrors2 = _interopRequireDefault(_httpErrors);
 
 var _account = require('../model/account');
 
@@ -37,7 +37,7 @@ var promisify = function promisify(fn) {
 };
 
 exports.default = function (request, response, next) {
-  console.log(request.headers.authorization, 'inside of bearer-auth-middleware');
+  // console.log(request.headers.authorization, 'inside of bearer-auth-middleware');
   if (!request.headers.authorization) {
     return next(new _httpErrors2.default(400, 'Auth - __ERROR__ authorization header required'));
   }
@@ -54,7 +54,7 @@ exports.default = function (request, response, next) {
     return _account2.default.findOne({ tokenSeed: decryptedToken.tokenSeed });
   }).then(function (account) {
     if (!account) {
-      return next(new _httpErrors2.default(400, 'Auth - __ERROR__ not found'));
+      throw new _httpErrors2.default(404, 'Auth - __ERROR__ not found');
     }
     request.account = account;
     return next();

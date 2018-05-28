@@ -23,6 +23,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //
 
+/*eslint-disable-line*/
 var pCreateImageMock = function pCreateImageMock() {
   var resultMock = {};
   return (0, _accountMock.pCreateAccountMock)().then(function (mockAcctResponse) {
@@ -30,7 +31,9 @@ var pCreateImageMock = function pCreateImageMock() {
 
     return new _image2.default({
       artist: _faker2.default.lorem.words(1),
-      url: _faker2.default.random.image(),
+      url: _faker2.default.random.words(1),
+      genre: _faker2.default.random.words(1),
+      camera: _faker2.default.random.words(1),
       account: resultMock.accountMock.account._id
     }).save();
   }).then(function (image) {

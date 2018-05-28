@@ -28,18 +28,17 @@ var _basicAuthMiddleware2 = _interopRequireDefault(_basicAuthMiddleware);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var authRouter = new _express.Router();
 var jsonParser = _bodyParser2.default.json();
+var authRouter = new _express.Router();
 
 authRouter.post('/signup', jsonParser, function (request, response, next) {
   if (!request.body.username || !request.body.email || !request.body.password) {
     return next(new _httpErrors2.default(400, '__ERROR__ username, email, and password required to create an account'));
   }
 
-  return _account2.default.create(request.body.username, request.body.email, request.body.password).then(function (account) {
-    delete request.body.password;
+  return _account2.default.create(request.body.username, request.body.email, request.body.password).then(function (user) {
     _logger2.default.log(_logger2.default.INFO, 'AUTH - Creating Token');
-    return account.createToken();
+    return user.createToken();
   }).then(function (token) {
     _logger2.default.log(_logger2.default.INFO, 'AUTH - Returning a 200 status and a token');
     return response.json({ token: token });

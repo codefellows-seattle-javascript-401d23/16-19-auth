@@ -42,9 +42,9 @@ exports.default = function (request, response, next) {
   // we know we have a username and password now...
   return _account2.default.findOne({ username: username }).then(function (account) {
     if (!account) {
-      return next(new _httpErrors2.default(404, 'AUTH ERROR not found'));
+      throw new _httpErrors2.default(404, 'AUTH ERROR not found');
     }
-    return account.pVerifyPassword(password);
+    return account.pVerifyPassword(password); // Todo:  where does this live???
   }).then(function (account) {
     request.account = account;
     return next(); // this calls the next function in the middleware chain.

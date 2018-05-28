@@ -22,9 +22,6 @@ var _httpErrors2 = _interopRequireDefault(_httpErrors);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var HASH_SALT_ROUNDS = 8;
-var TOKEN_SEED_SIZE = 128;
-
 var accountSchema = _mongoose2.default.Schema({
   passwordHash: {
     type: String,
@@ -53,6 +50,9 @@ var accountSchema = _mongoose2.default.Schema({
   }
 });
 
+var TOKEN_SEED_SIZE = 128;
+var HASH_SALT_ROUNDS = 8;
+
 function verifyPassword(password) {
   var _this = this;
 
@@ -66,13 +66,14 @@ function verifyPassword(password) {
 
 function createToken() {
   this.tokenSeed = _crypto2.default.randomBytes(TOKEN_SEED_SIZE).toString('hex');
+
   return this.save().then(function (account) {
     return _jsonwebtoken2.default.sign({ tokenSeed: account.tokenSeed }, process.env.THE_DESPERATE_SECRET);
   });
 }
 
-accountSchema.methods.createToken = createToken;
 accountSchema.methods.verifyPassword = verifyPassword;
+accountSchema.methods.createToken = createToken;
 
 var Account = module.exports = _mongoose2.default.model('account', accountSchema);
 

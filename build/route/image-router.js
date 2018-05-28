@@ -30,7 +30,8 @@ var _logger2 = _interopRequireDefault(_logger);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var multerUpload = (0, _multer2.default)({ dest: __dirname + '/temp' });
+var multerUpload = (0, _multer2.default)({ dest: __dirname + '/temp' }); /*eslint-disable-line*/
+
 
 var imageRouter = new _express.Router();
 
@@ -39,7 +40,7 @@ imageRouter.post('/images', _bearerAuthMiddleware2.default, multerUpload.any(), 
   if (!request.account) {
     return next(new _httpErrors2.default(404, 'IMAGE ROUTER _ERROR_, not found'));
   }
-  // console.log(request.body, 'hello there'); // the image mock is created by the time we get to  this line...
+  // console.log(request.body, 'hello there'); // the image mock is created...
 
   if (!request.body || request.files.length > 1 || request.files[0].fieldname !== 'image') {
     return next(new _httpErrors2.default(400, 'IMAGE ROUTER __ERROR__ invalid request'));
@@ -69,7 +70,5 @@ imageRouter.get('/images/:id', _bearerAuthMiddleware2.default, function (request
     return response.json(image);
   }).catch(next);
 });
-
-imageRouter.delete('/images');
 
 exports.default = imageRouter;

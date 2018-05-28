@@ -2,7 +2,6 @@
 
 import superagent from 'superagent';
 import { startServer, stopServer } from '../lib/server';
-
 import { pCreateAccountMock, pRemoveAccountMock } from './lib/account-mock';
 
 const apiURL = `http://localhost:${process.env.PORT}`;
@@ -25,32 +24,33 @@ describe('AUTH Router', () => {
       });
   });
 
-  test('POST should return a 400 status code Bad Request for not sending the correct sign up information', () => {
+  test('POST /signup - an incomplete request should return a 400', () => {
     return superagent.post(`${apiURL}/signup`)
       .send({
-        username: '',
-        email: '',
-        password: '',
+        username: 'demi',
+        email: 'demi@dog.com',
       })
-      .then((response) => {
-        console.log(response, 'bad request test');
-        expect(response.sendStatus).toEqual(400);
+      .then(Promise.reject)
+      .catch((response) => {
+        expect(response.status).toEqual(400);
       });
   });
 
+  // describe('GET /login', () => {
+  //   test('GET /login should return a 200 status code and a Token on success', () => {
+  //     return pCreateAccountMock()
+  //       .then((mock) => {
+  //         // console.log(mock.request.username, mock.request.password);
+  //         return superagent.get(`${apiURL}/login`)
+  //           .auth(mock.request.username, mock.request.password);
+  //       })
+  //       .then((response) => {
+  //         expect(response.status).toEqual(200);
+  //         expect(response.body.token).toBeTruthy();
+  //       });
+  //   });
+  // });
 
-  test('GET /login should return a 200 status code and a Token on success', () => {
-    return pCreateAccountMock()
-      .then((mock) => {
-        console.log(mock.request.username, mock.request.password);
-        return superagent.get(`${apiURL}/login`)
-          .auth(mock.request.username, mock.request.password);
-      })
-      .then((response) => {
-        expect(response.status).toEqual(200);
-        expect(response.body.token).toBeTruthy();
-      });
-  });
 
   test('GET /login should return a 400 status if a bad request is made to the database', () => {
     return pCreateAccountMock()

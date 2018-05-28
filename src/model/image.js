@@ -13,6 +13,7 @@ const imageSchema = mongoose.Schema({
   },
   genre: { type: String },
   camera: { type: String },
+
   account: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,

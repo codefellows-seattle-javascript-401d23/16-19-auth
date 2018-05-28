@@ -1,7 +1,7 @@
 'use strict';
 
-import HttpError from 'http-errors';
 import jsonWebToken from 'jsonwebtoken';
+import HttpError from 'http-errors';
 import Account from '../model/account';
 
 // TODO: wrapping
@@ -17,7 +17,7 @@ const promisify = fn => (...args) => {
 };
 
 export default (request, response, next) => {
-  console.log(request.headers.authorization, 'inside of bearer-auth-middleware');
+  // console.log(request.headers.authorization, 'inside of bearer-auth-middleware');
   if (!request.headers.authorization) {
     return next(new HttpError(400, 'Auth - __ERROR__ authorization header required'));
   }
@@ -35,7 +35,7 @@ export default (request, response, next) => {
     })
     .then((account) => {
       if (!account) {
-        return next(new HttpError(400, 'Auth - __ERROR__ not found'));
+        throw new HttpError(404, 'Auth - __ERROR__ not found');
       }
       request.account = account;
       return next();

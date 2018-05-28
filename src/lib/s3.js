@@ -15,7 +15,7 @@ const s3Upload = (path, key) => {
   return amazonS3.upload(uploadOptions)
     .promise() // this calls the internal callback of the .upload method
     .then((response) => {
-      console.log(response, 'response from s3');
+      // console.log(response, 'response from s3');
       return fs.remove(path)
         .then(() => response.Location)
         .catch(err => Promise.reject(err));
@@ -27,26 +27,6 @@ const s3Upload = (path, key) => {
     });
 };
 
-
-// TODO: Turns out I didn't need this but keeping it in case I want to add future functionality.
-const s3Get = (key) => {
-  const aws = require('aws-sdk');
-  const amazonS3 = new aws.S3();
-  const getOptions = {
-    Bucket: process.env.AWS_BUCKET,
-    Key: key,
-  };
-
-  return amazonS3.getObject(getOptions)
-    .promise()
-    .then((data) => {
-      // console.log(data, 'SUCCESSFUL GET OBJECT FROM S3 BUCKET');
-    })
-    .catch((err) => {
-      Promise.reject(err);
-    });
-};
-
 const s3Remove = (key) => {
   const aws = require('aws-sdk');
   const amazonS3 = new aws.S3();
@@ -55,14 +35,7 @@ const s3Remove = (key) => {
     Bucket: process.env.AWS_BUCKET,
   };
 
-  return amazonS3.deleteObject(removeOptions) // TODO: this could be an issue...
-    .promise()
-    .then((data) => {
-      console.log(data, 'SUCCESSFUL DELETION');
-    })
-    .catch((err) => {
-      Promise.reject(err);
-    });
+  return amazonS3.deleteObject(removeOptions).promise();
 };
 
-export { s3Upload, s3Get, s3Remove };
+export { s3Upload, s3Remove };

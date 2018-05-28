@@ -26,9 +26,9 @@ export default (request, response, next) => {
   return Account.findOne({ username })
     .then((account) => {
       if (!account) {
-        return next(new HttpError(404, 'AUTH ERROR not found'));
+        throw new HttpError(404, 'AUTH ERROR not found');
       }
-      return account.pVerifyPassword(password);
+      return account.pVerifyPassword(password); // Todo:  where does this live???
     })
     .then((account) => {
       request.account = account;

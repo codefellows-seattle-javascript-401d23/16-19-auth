@@ -19,13 +19,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var pCreateSongMock = function pCreateSongMock() {
   var resultMock = {};
+
   return (0, _accountMock.pCreateAccountMock)().then(function (accountSetMock) {
     resultMock.accountSetMock = accountSetMock;
+
     return new _song2.default({
       song: _faker2.default.lorem.words(10),
-      artist: _faker2.default.random.image(),
-      genre: _faker2.default.name.lastName(),
-      length: _faker2.default.name.firstName(),
+      artist: _faker2.default.random.words(2),
+      genre: _faker2.default.random.words(1),
+      length: _faker2.default.random.words(1),
+
       account: accountSetMock.account._id // this line sets up the relationship
     }).save();
   }).then(function (song) {

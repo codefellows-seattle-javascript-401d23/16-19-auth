@@ -5,7 +5,7 @@ import { Router } from 'express';
 import HttpError from 'http-errors';
 import bearerAuthMiddleWare from '../lib/bearer-auth-middleware';
 import Image from '../model/image';
-import { s3Upload } from '../lib/s3';
+import { s3Upload, s3Remove } from '../lib/s3'; /*eslint-disable-line*/
 import logger from '../lib/logger';
 
 const multerUpload = multer({ dest: `${__dirname}/temp` });
@@ -17,7 +17,7 @@ imageRouter.post('/images', bearerAuthMiddleWare, multerUpload.any(), (request, 
   if (!request.account) {
     return next(new HttpError(404, 'IMAGE ROUTER _ERROR_, not found'));
   }
-  // console.log(request.body, 'hello there'); // the image mock is created by the time we get to  this line...
+  // console.log(request.body, 'hello there'); // the image mock is created...
 
   if (!request.body || request.files.length > 1 || request.files[0].fieldname !== 'image') {
     return next(new HttpError(400, 'IMAGE ROUTER __ERROR__ invalid request'));
@@ -50,8 +50,5 @@ imageRouter.get('/images/:id', bearerAuthMiddleWare, (request, response, next) =
     })
     .catch(next);
 });
-
-
-imageRouter.delete('/images');
 
 export default imageRouter;

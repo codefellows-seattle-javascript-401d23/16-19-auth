@@ -22,9 +22,10 @@ var pCreateAccountMock = function pCreateAccountMock() {
     email: _faker2.default.internet.email(),
     password: _faker2.default.lorem.words(5)
   };
+
   return _account2.default.create(mock.request.username, mock.request.email, mock.request.password).then(function (account) {
     mock.account = account;
-    return account.createToken();
+    return account.createToken(); // Todo: this line is messing up the GET
   }).then(function (token) {
     mock.token = token;
     return _account2.default.findById(mock.account._id);

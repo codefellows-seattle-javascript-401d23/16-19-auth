@@ -15,6 +15,7 @@ var songSchema = _mongoose2.default.Schema({
   artist: { type: String },
   genre: { type: String },
   length: { type: String },
+
   account: {
     type: _mongoose2.default.Schema.ObjectId,
     required: true,
@@ -22,4 +23,4 @@ var songSchema = _mongoose2.default.Schema({
   }
 });
 
-exports.default = _mongoose2.default.model('profile', songSchema);
+exports.default = _mongoose2.default.model('song', songSchema);

@@ -7,6 +7,7 @@ const songSchema = mongoose.Schema({
   artist: { type: String },
   genre: { type: String },
   length: { type: String },
+
   account: {
     type: mongoose.Schema.ObjectId,
     required: true,
@@ -14,4 +15,4 @@ const songSchema = mongoose.Schema({
   },
 });
 
-export default mongoose.model('profile', songSchema);
+export default mongoose.model('song', songSchema);

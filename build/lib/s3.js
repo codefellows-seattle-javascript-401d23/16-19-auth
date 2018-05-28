@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.s3Remove = exports.s3Get = exports.s3Upload = undefined;
+exports.s3Remove = exports.s3Upload = undefined;
 
 var _fsExtra = require('fs-extra');
 
@@ -23,7 +23,7 @@ var s3Upload = function s3Upload(path, key) {
 
   return amazonS3.upload(uploadOptions).promise() // this calls the internal callback of the .upload method
   .then(function (response) {
-    console.log(response, 'response from s3');
+    // console.log(response, 'response from s3');
     return _fsExtra2.default.remove(path).then(function () {
       return response.Location;
     }).catch(function (err) {
@@ -38,22 +38,6 @@ var s3Upload = function s3Upload(path, key) {
   });
 };
 
-// TODO: Turns out I didn't need this but keeping it in case I want to add future functionality.
-var s3Get = function s3Get(key) {
-  var aws = require('aws-sdk');
-  var amazonS3 = new aws.S3();
-  var getOptions = {
-    Bucket: process.env.AWS_BUCKET,
-    Key: key
-  };
-
-  return amazonS3.getObject(getOptions).promise().then(function (data) {
-    // console.log(data, 'SUCCESSFUL GET OBJECT FROM S3 BUCKET');
-  }).catch(function (err) {
-    Promise.reject(err);
-  });
-};
-
 var s3Remove = function s3Remove(key) {
   var aws = require('aws-sdk');
   var amazonS3 = new aws.S3();
@@ -62,14 +46,8 @@ var s3Remove = function s3Remove(key) {
     Bucket: process.env.AWS_BUCKET
   };
 
-  return amazonS3.deleteObject(removeOptions) // TODO: this could be an issue...
-  .promise().then(function (data) {
-    console.log(data, 'SUCCESSFUL DELETION');
-  }).catch(function (err) {
-    Promise.reject(err);
-  });
+  return amazonS3.deleteObject(removeOptions).promise();
 };
 
 exports.s3Upload = s3Upload;
-exports.s3Get = s3Get;
 exports.s3Remove = s3Remove;

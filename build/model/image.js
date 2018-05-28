@@ -21,6 +21,7 @@ var imageSchema = _mongoose2.default.Schema({
   },
   genre: { type: String },
   camera: { type: String },
+
   account: {
     type: _mongoose2.default.Schema.Types.ObjectId,
     required: true

@@ -38,12 +38,15 @@ describe('POST /songs', function () {
     });
   });
 
-  test('GET /songs - the test should get a 200 if no errors and a song is returned', function () {
-    return (0, _songMock.pCreateSongMock)().then(function (mock) {
-      return _superagent2.default.get(apiURL + '/songs').auth(mock.request.username, mock.request.password);
-    }).then(function (response) {
-      expect(response.status).toEqual(200);
-      expect(response.body.token).toBeTruthy();
-    });
-  });
+  // test('GET /songs - the test should get a 200 if no errors and a song is returned', () => {
+  //   return pCreateSongMock()
+  //     .then((mock) => {
+  //       return superagent.get(`${apiURL}/songs`)
+  //         .auth(mock.request.username, mock.request.password);
+  //     })
+  //     .then((response) => {
+  //       expect(response.status).toEqual(200);
+  //       expect(response.body.token).toBeTruthy();
+  //     });
+  // });
 });
