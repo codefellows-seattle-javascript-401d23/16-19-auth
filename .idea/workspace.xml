@@ -2,20 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9bc1e671-b4b3-48e2-a44e-a001c74153b2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/auth-router.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/auth-router.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/image-router.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/image-router.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/lib/profile-mock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/lib/profile-mock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/__test__/profile-router.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/__test__/profile-router.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/basic-auth-middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/basic-auth-middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/bearer-auth-middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/bearer-auth-middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/bearer-auth.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lib/error-middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/error-middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/account.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/route/auth-router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/route/auth-router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/route/image-router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/route/image-router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/route/profile-router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/route/profile-router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -62,14 +49,32 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="profile-router.test.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="profile-router.test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/__test__/profile-router.test.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+              <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
               <folding>
                 <element signature="e#16#52#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="28" selection-start-column="28" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="592">
+              <caret line="316" column="69" selection-start-line="316" selection-start-column="69" selection-end-line="316" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -91,30 +96,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
               <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/lib/server.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="30" column="8" selection-start-line="30" selection-start-column="8" selection-end-line="30" selection-end-column="8" />
-              <folding>
-                <element signature="e#15#45#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="account-mock.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/__test__/lib/account-mock.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
-              <folding>
-                <element signature="e#15#41#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -200,7 +181,6 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Tue-May-08-2018.log" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/route/sound-router.js" />
         <option value="$PROJECT_DIR$/src/__test__/lib/setup.js" />
         <option value="$PROJECT_DIR$/src/lib/server.js" />
@@ -225,6 +205,7 @@
         <option value="$PROJECT_DIR$/src/__test__/lib/image-mock.js" />
         <option value="$PROJECT_DIR$/src/__test__/image-router.test.js" />
         <option value="$PROJECT_DIR$/src/__test__/profile-router.test.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -272,6 +253,26 @@
               <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="__test__" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="__test__" type="462c0819:PsiDirectoryNode" />
+              <item name="asset" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="__test__" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
+              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
@@ -426,7 +427,7 @@
       <workItem from="1527475886616" duration="11037000" />
       <workItem from="1527488722190" duration="174000" />
       <workItem from="1527517975305" duration="18262000" />
-      <workItem from="1527634913650" duration="668000" />
+      <workItem from="1527634913650" duration="949000" />
     </task>
     <servers />
   </component>
@@ -463,7 +464,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93595000" />
+    <option name="totallyTimeSpent" value="93876000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1247" height="797" extended-state="0" />
@@ -668,20 +669,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2130">
           <caret line="1422" selection-start-line="1422" selection-end-line="1422" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" selection-start-column="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2533">
-          <caret line="149" column="81" selection-start-line="149" selection-start-column="81" selection-end-line="149" selection-end-column="81" />
         </state>
       </provider>
     </entry>
@@ -924,10 +911,24 @@
     <entry file="file://$PROJECT_DIR$/src/__test__/profile-router.test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="32" lean-forward="true" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
+          <caret line="14" column="32" selection-start-line="14" selection-start-column="32" selection-end-line="14" selection-end-column="32" />
           <folding>
             <element signature="e#16#52#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="28" selection-start-column="28" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="592">
+          <caret line="316" column="69" selection-start-line="316" selection-start-column="69" selection-end-line="316" selection-end-column="69" />
         </state>
       </provider>
     </entry>
