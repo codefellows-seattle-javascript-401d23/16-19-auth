@@ -9,6 +9,7 @@ import HttpError from 'http-errors';
 const HASH_ROUNDS = 8;
 const TOKEN_SEED_SIZE = 128;
 
+// Dawn - Vincicio stressed the account schema should never leave the server
 const accountSchema = mongoose.Schema({
   passwordHash: {
     type: String,
@@ -39,9 +40,9 @@ function pVerifyPassword(password) {
   return bcrypt.compare(password, this.passwordHash)
     .then((result) => {
       if (!result) {
-        throw new HttpError(400, '__AUTH__ incorrect username or password');
+        throw new HttpError(400, '__AUTH__ incorrect data');
       }
-      return this;
+      return this; // returns the current account
     });
 }
 

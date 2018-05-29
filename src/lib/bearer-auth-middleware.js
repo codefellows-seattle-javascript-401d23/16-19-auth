@@ -8,9 +8,9 @@ const promisify = callbackStyleFunction => (...args) => {
   return new Promise((resolve, reject) => {
     callbackStyleFunction(...args, (error, data) => {
       if (error) {
-        return reject(error);
+        return reject(error); // will hit the next .catch
       }
-      return resolve(data);
+      return resolve(data); // will hit the next .then
     });
   });
 };
@@ -19,7 +19,6 @@ export default (request, response, next) => {
   if (!request.headers.authorization) {
     return next(new HttpError(400, '__ERROR__ authorization header required'));
   }
-
 
   const token = request.headers.authorization.split('Bearer ')[1];
 

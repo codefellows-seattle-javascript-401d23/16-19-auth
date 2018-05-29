@@ -50,16 +50,7 @@ describe('AUTH Router', () => {
           expect(response.body.token).toBeTruthy();
         });
     });
-    // test('GET /login should get a 400 status code for bad request', () => {
-    //   return pCreateAccountMock()
-    //     .then((mock) => {
-    //       return superagent.get(`${apiURL}/login`)
-    //         .auth(mock.request.username, 'bad password');
-    //     })
-    //     .then((response) => {
-    //       expect(response.status).toEqual(400);
-    //     });
-    // });
+
     test('GET /login should get a 404 status code for a bad request', () => {
       return pCreateAccountMock()
         .then((mock) => {

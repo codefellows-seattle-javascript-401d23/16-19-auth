@@ -16,7 +16,7 @@ const pCreateProfileMock = () => {
         avatar: faker.random.image(),
         lastName: faker.name.lastName(),
         firstName: faker.name.firstName(),
-        account: accountSetMock.account._id,
+        account: accountSetMock.account._id, // sets up the relationship
       }).save();
     })
     .then((profile) => {
@@ -26,9 +26,9 @@ const pCreateProfileMock = () => {
 };
 
 const pRemoveProfileMock = () => {
-  return Promise.all([
-    Profile.remove({}),
-    pRemoveAccountMock(),
+  return Promise.all([ // takes an array of promises
+    Profile.remove({}), // remove all of the profiles
+    pRemoveAccountMock(), // remove all of the account mocks
   ]);
 };
 

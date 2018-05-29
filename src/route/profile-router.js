@@ -18,7 +18,7 @@ profileRouter.post('/profiles', bearerAuthMiddleware, jsonParser, (request, resp
   return new Profile({
     ...request.body,
     account: request.account._id,
-  })
+  }) // destructure entires body object
     .save()
     .then((profile) => {
       logger.log(logger.INFO, 'Returning a 200 and a new Profile');

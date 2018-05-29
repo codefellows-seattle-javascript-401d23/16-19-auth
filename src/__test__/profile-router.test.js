@@ -4,7 +4,7 @@
 import superagent from 'superagent';
 import { startServer, stopServer } from '../lib/server';
 import { pCreateAccountMock } from './lib/account-mock';
-// import { pCreateProfileMock, pRemoveProfileMock} from './lib/profile-mock';
+// import { pCreateProfileMock, pRemoveProfileMock } from './lib/profile-mock';
 import { pRemoveProfileMock } from './lib/profile-mock';
 
 const apiURL = `http://localhost:${process.env.PORT}`;
@@ -35,26 +35,19 @@ describe('POST /profiles', () => {
         expect(response.body.bio).toEqual('I am a walrus');
       });
   });
-  test('POST 400 due to lack of name', () => {
-    let accountMock = null;
-    return pCreateAccountMock()
-      .then((accountSetMock) => {
-        accountMock = accountSetMock;
-        return superagent.post(`${apiURL}/profiles`)
-          .set('Authorization', `Bearer ${accountSetMock.token}`)
-          .send({
-            bio: 'I am a walrus',
-          });
-      })
-      .then((response) => {
-        expect(response.status).toEqual(400);
-        expect(response.body.account).toEqual(accountMock.account._id.toString());
-      });
-  // test('GET /profiles:/id return profile by ID', () => {
-  //   let profileMock = null;
-  //   return pCreateProfileMock()
-  //     .then(profileMock)
-  //   profileMock = profile;
-  //   return superagent.get(`${apiURL}/${profile._id}`);
-  });
+  // test('POST 400 due to lack of name', () => {
+  //   let accountMock = null;
+  //   return pCreateAccountMock()
+  //     .then((accountSetMock) => {
+  //       accountMock = accountSetMock;
+  //       return superagent.post(`${apiURL}/profiles`)
+  //         .set('Authorization', `Bearer ${accountSetMock.token}`)
+  //         .send({
+  //           bio: 'I am a walrus',
+  //         });
+  //     })
+  //     .then((response) => {
+  //       expect(response.status).toEqual(400);
+  //       expect(response.body.account).toEqual(accountMock.account._id.toString());
+  //     });
 });

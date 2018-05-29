@@ -26,12 +26,13 @@ authRouter.post('/signup', jsonParser, (request, response, next) => {
 
 authRouter.get('/login', basicAuthMiddleware, (request, response, next) => {
   if (!request.account) {
-    logger.log(logger.INFO, 'this no account is being caught');
     return next(new HttpError(400, 'AUTH - invalid request'));
   }
   return request.account.pCreateToken()
-    .then(logger.log(logger.INFO, 'LOGIN - responding with a 200 status and a Token'))
-    .then(token => response.json({ token }))
+    .then((token) => {
+      (logger.log(logger.INFO, 'LOGIN - responding with a 200 status and a Token'));
+      return response.json({ token });
+    })
     .catch(next);
 });
 
