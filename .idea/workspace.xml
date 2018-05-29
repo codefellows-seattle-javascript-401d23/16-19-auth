@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="9bc1e671-b4b3-48e2-a44e-a001c74153b2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/diagnostic.data/metrics.2018-05-29T23-06-38Z-00000" beforeDir="false" afterPath="$PROJECT_DIR$/db/diagnostic.data/metrics.2018-05-29T23-06-38Z-00000" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/diagnostic.data/metrics.interim" beforeDir="false" afterPath="$PROJECT_DIR$/db/diagnostic.data/metrics.interim" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db/journal/WiredTigerLog.0000000050" beforeDir="false" afterPath="$PROJECT_DIR$/db/journal/WiredTigerLog.0000000050" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -65,7 +69,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="28" selection-start-column="28" selection-end-column="28" />
+              <caret column="39" selection-start-column="39" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -73,8 +77,8 @@
       <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="592">
-              <caret line="316" column="69" selection-start-line="316" selection-start-column="69" selection-end-line="316" selection-end-column="69" />
+            <state relative-caret-position="524">
+              <caret line="316" lean-forward="true" selection-start-line="316" selection-end-line="316" />
             </state>
           </provider>
         </entry>
@@ -128,7 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>something</find>
       <find>json.json</find>
       <find>jdon</find>
       <find>access</find>
@@ -158,6 +161,7 @@
       <find>createtoken</find>
       <find>pCreateAccountMock</find>
       <find>console.log</find>
+      <find>idea</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src/route</dir>
@@ -178,7 +182,6 @@
         <option value="$PROJECT_DIR$/Mon-May-07-2018.log" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/route/profile-router.test.js" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/Tue-May-08-2018.log" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/route/sound-router.js" />
@@ -205,6 +208,7 @@
         <option value="$PROJECT_DIR$/src/__test__/lib/image-mock.js" />
         <option value="$PROJECT_DIR$/src/__test__/image-router.test.js" />
         <option value="$PROJECT_DIR$/src/__test__/profile-router.test.js" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
@@ -242,43 +246,6 @@
             <path>
               <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
               <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="__test__" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="__test__" type="462c0819:PsiDirectoryNode" />
-              <item name="asset" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="__test__" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="16-19-auth" type="b2602c69:ProjectViewProjectNode" />
-              <item name="16-19-auth" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="route" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -427,7 +394,7 @@
       <workItem from="1527475886616" duration="11037000" />
       <workItem from="1527488722190" duration="174000" />
       <workItem from="1527517975305" duration="18262000" />
-      <workItem from="1527634913650" duration="949000" />
+      <workItem from="1527634913650" duration="1243000" />
     </task>
     <servers />
   </component>
@@ -464,7 +431,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93876000" />
+    <option name="totallyTimeSpent" value="94170000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1247" height="797" extended-state="0" />
@@ -921,14 +888,14 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <caret column="28" selection-start-column="28" selection-end-column="28" />
+          <caret column="39" selection-start-column="39" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="592">
-          <caret line="316" column="69" selection-start-line="316" selection-start-column="69" selection-end-line="316" selection-end-column="69" />
+        <state relative-caret-position="524">
+          <caret line="316" lean-forward="true" selection-start-line="316" selection-end-line="316" />
         </state>
       </provider>
     </entry>

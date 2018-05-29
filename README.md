@@ -1,4 +1,4 @@
-Lab 17: Bearer Authorization
+Lab 19: Authorization - File Management
 ======
 
 
