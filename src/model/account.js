@@ -4,21 +4,28 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import jsonWebToken from 'jsonwebtoken';
+import HttpError from 'http-errors';
 
 const HASH_ROUNDS = 8;
-const TOKEN_SEED_LENGTH = 128;
+const TOKEN_SEED_SIZE = 128;
 
+// Dawn - Vincicio stressed the account schema should never leave the server
 const accountSchema = mongoose.Schema({
   passwordHash: {
     type: String,
     required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
   },
   username: {
     type: String,
     required: true,
     unique: true,
   },
-  email: {
+  tokenSeed: {
     type: String,
     required: true,
     unique: true,
@@ -29,8 +36,18 @@ const accountSchema = mongoose.Schema({
   },
 });
 
+function pVerifyPassword(password) {
+  return bcrypt.compare(password, this.passwordHash)
+    .then((result) => {
+      if (!result) {
+        throw new HttpError(400, '__AUTH__ incorrect data');
+      }
+      return this; // returns the current account
+    });
+}
+
 function pCreateToken() {
-  this.tokenSeed = crypto.randomBytes(TOKEN_SEED_LENGTH).toString('hex');
+  this.tokenSeed = crypto.randomBytes(TOKEN_SEED_SIZE).toString('hex');
   return this.save()
     .then((account) => {
       return jsonWebToken.sign(
@@ -41,14 +58,14 @@ function pCreateToken() {
 }
 
 accountSchema.methods.pCreateToken = pCreateToken;
+accountSchema.methods.pVerifyPassword = pVerifyPassword;
 
-const Account = mongoose.model('account', accountSchema);
+const Account = module.exports = mongoose.model('account', accountSchema);
 
 Account.create = (username, email, password) => {
   return bcrypt.hash(password, HASH_ROUNDS)
     .then((passwordHash) => {
-      password = null; // eslint-disable-line
-      const tokenSeed = crypto.randomBytes(TOKEN_SEED_LENGTH).toString('hex');
+      const tokenSeed = crypto.randomBytes(TOKEN_SEED_SIZE).toString('hex');
       return new Account({
         username,
         email,
@@ -58,4 +75,4 @@ Account.create = (username, email, password) => {
     });
 };
 
-export default Account;
+// export default Account;

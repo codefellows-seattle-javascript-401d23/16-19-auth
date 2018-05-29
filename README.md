@@ -1,4 +1,4 @@
-Lab 16: Basic Authentication
+Lab 19: Authorization - File Management
 ======
 
 
@@ -15,6 +15,8 @@ Create a user `Account` model that keeps track of a username, email, hashed pass
   * on failure due to a bad request send a 400 status code
 
 ## Tests
-* POST tests for 200, 400, and 409 (if any keys are unique)
+200, 400, and 401 OR 404 tests for /login (Auth router)
+200, 400, and 401 OR 404 tests for POST /<resource-name>
+200 for GET /<resource-name>/:id
 
 
